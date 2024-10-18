@@ -46,7 +46,14 @@ class DatabaseSeeder extends Seeder
 
            if (!$user_admin->roles()->where('name', 'admin')->exists()) {
             $user_admin->roles()->attach($role_admin->id);
-        }
+            }
+
+            $this->call(BeritaSeeder::class);
+            $this->call(EkskulSeeder::class);
+            $this->call(EventSeeder::class);
+            $this->call(FasilitasSeeder::class);
+            $this->call(GuruSeeder::class);
+            $this->call(PrestasiSeeder::class);
 
     }
 }
