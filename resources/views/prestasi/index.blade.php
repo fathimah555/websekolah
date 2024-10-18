@@ -4,7 +4,9 @@
     <div class="container my-5">
         <!-- Judul Halaman -->
         <h1 class="text-center mb-5" style="color: #FFAD60; font-weight: bold;"></h1>
-
+        @if(Auth::user()->roles[0]->name =='admin')
+        <a href="{{ route('prestasi.create') }}" class="btn btn-primary">Add</a>
+        @endif
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach ($prestasis as $prestasi)
                 <div class="col d-flex align-items-stretch">
@@ -25,6 +27,21 @@
                         <div class="card-body text-center d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ $prestasi->title }}</h5>
                             <p class="card-text text-muted">Tanggal: {{ \Carbon\Carbon::parse($prestasi->date)->format('d M Y') }}</p>
+                            @if(Auth::user()->roles[0]->name =='admin')
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="{{ route('prestasi.edit', $prestasi->id) }}" class="btn btn-warning">Edit</a>
+                                </div>
+                                <div class="col-6">
+                                <form action="{{ route('prestasi.destroy', $prestasi->id) }}" method="POST">
+                                     @csrf
+                                     <button type="submit" class="btn btn-danger">Delete</button>
+ 
+                                </form>
+                                </div>
+                            </div>
+                        
+                            @endif
                         </div>
                     </div>
                 </div>

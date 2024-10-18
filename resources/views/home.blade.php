@@ -202,7 +202,7 @@
     </div>
 </div> --> 
 
-<div class="container my-5">
+<!-- <div class="container my-5">
     <div class="alert alert-info text-center" role="alert">
         <h4 class="alert-heading">Jumlah Siswa Terdaftar</h4>
         <p>Yuk, lihat berapa banyak siswa yang telah terdaftar di SMK GEMA KARYA BAHANA!</p>
@@ -213,7 +213,7 @@
             </button>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="container mt-5" id="jumlahSiswaSection">
     <div class="row">
@@ -414,52 +414,6 @@
 <main class="py-4">
     @yield('content')
 
-    <section id="jurusan" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="display-4 text-center mb-5"></h2>
-        <div class="row text-center justify-content-center">
-            <!-- Jurusan 1 -->
-            <div class="col-md-3 mb-3 px-4"> 
-                <div class="card border-0 mb-4">
-                    <div class="box" data-aos="fade-up" data-aos-duration="1000">
-                        <img src="https://1.bp.blogspot.com/-ESegSI2A23M/X57T6eSjBcI/AAAAAAAABkY/hS_aQ-iREmcYPsq_qEiFY0j3KkNyTXX7QCPcBGAYYCw/s320/logo%2BTSM%2BJADI.PNG" class="card-img-top mx-auto" alt="TEKNIK SEPEDA MOTOR" style="width: 70px;">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="/jurusan/tsm" class="text-warning">TEKNIK SEPEDA MOTOR</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <!-- Jurusan 2 -->
-            <div class="col-md-3 mb-3 px-4">
-                <div class="card border-0 mb-4">
-                    <div class="box" data-aos="fade-up" data-aos-duration="1000">
-                        <img src="https://2.bp.blogspot.com/_iahKDm89nQU/TE0OguEkytI/AAAAAAAAAtc/lM6QTTwxl0E/s1600/logo-tkj1.png" class="card-img-top mx-auto" alt="TEKNIK KOMPUTER DAN JARINGAN" style="width: 70px;">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="/jurusan/tkj" class="text-warning">TEKNIK KABEL DAN JARINGAN</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <!-- Jurusan 3 -->
-            <div class="col-md-3 mb-3 px-4">
-                <div class="card border-0 mb-4">
-                    <div class="box" data-aos="fade-up" data-aos-duration="1000">
-                        <img src="https://tse1.mm.bing.net/th?id=OIP.dDQicEDQx_0TPkb-yDHx9AHaGr&pid=Api&rs=1&c=1&qlt=95&w=110&h=99" class="card-img-top mx-auto" alt="AKUNTANSI DAN KEUANGAN LEMBAGA" style="width: 90px;">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="/jurusan/akuntansi" class="text-warning">AKUNTANSI DAN KEUANGAN LEMBAGA</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- 
 <section id="keterserapan-lulusan" class="py-5 bg-light">
     <div class="container">
@@ -778,7 +732,7 @@
             <!-- Tabel Berita
             <div class="container mt-5">
                 <h2 class="display-4 text-center mb-4">Daftar Berita</h2>
-                <a href="{{ route('admin.create') }}" class="btn btn-primary mb-3">Tambah Berita</a>
+               
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif

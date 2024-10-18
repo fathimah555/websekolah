@@ -4,7 +4,9 @@
 <section id="guru-tenaga-kependidikan" class="py-5" data-aos="fade-up">
     <div class="container">
         <h2 class="text-center mb-4">Guru Dan Tenaga Kependidikan</h2>
-
+        @if(Auth::user()->roles[0]->name =='admin')
+        <a href="{{ route('guru.create') }}" class="btn btn-primary mt-4 mb-4">Add</a>
+        @endif
         @if($gurus->isEmpty())
             <p class="text-center">Tidak ada data guru yang ditemukan.</p>
         @else
@@ -18,6 +20,21 @@
                                 <div class="card-body text-center">
                                     <h5 class="card-title">{{ $guru->nama }}</h5>
                                     <p class="card-text">{{ $guru->jabatan }}</p>
+
+                                    @if(Auth::user()->roles[0]->name =='admin')
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a href="{{ route('guru.edit', $guru->id) }}" class="btn btn-warning">Edit</a>
+                                            </div>
+                                            <div class="col-6">
+                                            <form action="{{ route('guru.destroy', $guru->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
@@ -29,7 +46,8 @@
             <!-- Wakil Kepala Sekolah (Kiri, Tengah, Kanan) -->
             <div class="row mb-5">
                 @php
-                    $wakilKepalaSekolah = $gurus->where('tipe', 'struktur')->where('jabatan', '!=', 'Kepala Sekolah')->take(3)->values();
+                    $wakilKepalaSekolah = $gurus->where('tipe', 'struktur')->where('jabatan', '!=', 'Kepala Sekolah')->values();
+                
                 @endphp
 
                 @foreach($wakilKepalaSekolah as $wakil)
@@ -39,6 +57,20 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $wakil->nama }}</h5>
                                 <p class="card-text">{{ $wakil->jabatan }}</p>
+                                @if(Auth::user()->roles[0]->name =='admin')
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="{{ route('guru.edit', $wakil->id) }}" class="btn btn-warning">Edit</a>
+                                        </div>
+                                        <div class="col-6">
+                                        <form action="{{ route('guru.destroy', $wakil->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -55,6 +87,20 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $guru->nama }}</h5>
                                 <p class="card-text">{{ $guru->jabatan }}</p>
+                                @if(Auth::user()->roles[0]->name =='admin')
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="{{ route('guru.edit', $guru->id) }}" class="btn btn-warning">Edit</a>
+                                        </div>
+                                        <div class="col-6">
+                                        <form action="{{ route('guru.destroy', $guru->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                
+                                @endif
                             </div>
                         </div>
                     </div>
