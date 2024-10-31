@@ -30,8 +30,8 @@
     <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow" style="background-color: #E8B86D;">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-        <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" style="width: 100px; height: 100px;">
-        <span class="ms-2 text-white fw-bold fs-4">SMK GEMA KARYA BAHANA</span>
+            <img src="{{ asset('assets/images/logo.png') }}" alt="Logo" style="width: 100px; height: 100px;">
+            <span class="ms-2 text-white fw-bold fs-4">SMK GEMA KARYA BAHANA</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -49,21 +49,10 @@
                         <i class="fas fa-user"></i> Profil
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                        <li><a class="dropdown-item text-body" href="/jurusan/selayang-pandang"><i class="fas fa-info-circle"></i> Selayang Pandang</a></li>
-                        <li><a class="dropdown-item text-body" href="/jurusan/sambutan-kepalasekolah"><i class="fas fa-chalkboard-teacher"></i> Sambutan Kepala Sekolah</a></li>
-                        <li><a class="dropdown-item text-body" href="/jurusan/visi-misi"><i class="fas fa-bullseye"></i> Visi Misi</a></li>
+                        <li><a class="dropdown-item text-body" href="/profile/selayang-pandang"><i class="fas fa-info-circle"></i> Selayang Pandang</a></li>
+                        <li><a class="dropdown-item text-body" href="/profile/sambutan-kepalasekolah"><i class="fas fa-chalkboard-teacher"></i> Sambutan Kepala Sekolah</a></li>
+                        <li><a class="dropdown-item text-body" href="{{ route('visimisi.index') }}"><i class="fas fa-bullseye"></i> Visi Misi</a></li>
                         <li><a class="dropdown-item text-body" href="{{ route('guru.index') }}"><i class="fas fa-users"></i> Guru dan Tenaga Pendidik</a></li>
-                    </ul>
-                </li>
-                <!-- Jurusan Dropdown -->
-                <li class="nav-item dropdown mx-2">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="jurusanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-tools"></i> Jurusan
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="jurusanDropdown">
-                        <li><a class="dropdown-item text-body" href="{{ url('/jurusan/tsm') }}"><i class="fas fa-motorcycle"></i> TEKNIK SEPEDA MOTOR</a></li>
-                        <li><a class="dropdown-item text-body" href="{{ url('/jurusan/tkj') }}"><i class="fas fa-network-wired"></i> TEKNIK KOMPUTER DAN JARINGAN</a></li>
-                        <li><a class="dropdown-item text-body" href="{{ url('/jurusan/akuntansi') }}"><i class="fas fa-calculator"></i> AKUNTANSI</a></li>
                     </ul>
                 </li>
                 <!-- Kesiswaan Dropdown -->
@@ -76,20 +65,38 @@
                         <li><a class="dropdown-item text-body" href="{{route('ekskul.index')}}"><i class="fas fa-futbol"></i> Ekskul</a></li>
                     </ul>
                 </li>
-                <!-- <li class="nav-item mx-2">
-                    <a class="nav-link text-white" href="{{ route('fasilitas.index') }}">
-                        <i class="fas fa-building"></i> Fasilitas
-                    </a>
-                </li> -->
                 <li class="nav-item mx-2">
                     <a class="nav-link text-white" href="{{ route('events.index') }}">
                         <i class="fas fa-calendar-alt"></i> Events
                     </a>
                 </li>
+                <!-- Tombol User Admin atau Logout -->
+                <li class="nav-item dropdown mx-2">
+                    @if(Auth::check())
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-cog"></i> {{ Auth::user()->name }} <!-- Menampilkan nama pengguna -->
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                            <li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-body" style="border: none; background: none; cursor: pointer;">
+                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    @else
+                        <a class="nav-link text-white" href="{{ route('login') }}">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    @endif
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+
         <main class="py-4">
             @yield('content')
         </main>

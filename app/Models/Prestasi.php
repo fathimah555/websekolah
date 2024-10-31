@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prestasi extends Model
 {
-    use HasFactory;
-    
-    protected $fillable = ['title', 'description', 'date', 'gambar'];
+    protected $fillable = ['title', 'description', 'date', 'gambar']; // Pastikan 'gambar' termasuk di sini
 }
+

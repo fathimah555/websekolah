@@ -9,14 +9,10 @@ class PrestasiController extends Controller
 {
     public function index()
     {
-        $prestasis = Prestasi::all(); // Mengambil semua data prestasi
-        return view('prestasi.index', compact('prestasis')); // Pastikan 'prestasis' sesuai dengan variabel di view
-    }
-
-    public function show($id)
-    {
-        $prestasi = Prestasi::findOrFail($id); // Ambil prestasi berdasarkan ID
-        return view('prestasi.show', compact('prestasi')); // Ganti dengan view yang sesuai
+        // Mengambil semua data prestasi dari database
+        $prestasis = Prestasi::all();
+        // Mengembalikan tampilan dengan data prestasi
+        return view('prestasi.index', compact('prestasis'));
     }
 
     public function create()
@@ -28,7 +24,7 @@ class PrestasiController extends Controller
     {
         Prestasi::create($request->all());
 
-        return redirect()->route('prestasi.index')->with('success', 'prestasi berhasil ditambahkan');
+        return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -40,9 +36,15 @@ class PrestasiController extends Controller
     public function update(Request $request, $id)
     {
         $prestasi = Prestasi::findOrFail($id);
+        if($request->hasFile('gambar')){
+            $image = $request->gambar->getClientOriginalName();
+            $request->gambar->move(public_path('assets/images'), $image);
+        }
         $prestasi->update($request->all());
+        $prestasi->gambar = $image;
+        $prestasi->save();
 
-        return redirect()->route('prestasi.index')->with('success', 'prestasi berhasil diperbarui');
+        return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil diperbarui');
     }
 
     public function destroy($id)
@@ -50,6 +52,6 @@ class PrestasiController extends Controller
         $prestasi = Prestasi::findOrFail($id);
         $prestasi->delete();
 
-        return redirect()->route('prestasi.index')->with('success', 'prestasi berhasil dihapus');
+        return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil dihapus');
     }
 }

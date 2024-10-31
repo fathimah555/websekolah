@@ -5,7 +5,7 @@
 <div class="container mt-5">
     <h1>Edit ekskul</h1>
 
-    <form action="{{ route('ekskul.update',$ekskul->id) }}" method="POST">
+    <form action="{{ route('ekskul.update',$ekskul->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -26,3 +26,4 @@
     </form>
 </div>
 @endsection
+ 

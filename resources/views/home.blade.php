@@ -12,8 +12,8 @@
             <div class="bg-dark bg-opacity-50" style="height: 100%; display: flex; align-items: center;">
                 <div class="carousel-caption text-white text-center">
                     <h1 class="display-4">Selamat Datang di SMK GEMA KARYA BAHANA</h1>
-                    <p class="lead">Mencetak Generasi Berprestasi dan Berkarakter</p>
-                    <a href="{{ route('home') }}" class="btn btn-lg text-dark" style="background-color: #FFAD60">Pelajari Lebih Lanjut</a>
+                    <p class="lead">Ber Akhlak Mulia, Ber Taqwa & Ber Mutu (ATM)</p>
+                    <a href="{{ route('home') }}" class="btn  text-dark"></a>
                 </div>
             </div>
         </div>
@@ -100,20 +100,23 @@
 
         <!-- Jurusan Card -->
         <div class="col-md-3">
-            <div class="card shadow-sm text-center p-3">
-                <div class="card-header">
-                    <i class="bi bi-tools fs-1"></i>
-                    <h5 class="card-title mt-3">Jurusan</h5>
+            <!-- Seluruh card bisa diklik -->
+            <a href="{{ route ('jurusan.index') }}"class="card-link">
+                <div class="card shadow-sm text-center p-3">
+                    <div class="card-header">
+                        <i class="bi bi-tools fs-1"></i>
+                        <h5 class="card-title mt-3">Jurusan</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Pilih jurusan yang sesuai dengan minatmu:</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Teknik Komputer dan Jaringan</strong></li>
+                            <li><strong>Teknik Sepeda Motor</strong></li>
+                            <li><strong>Akuntansi</strong></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">Pilih jurusan yang sesuai dengan minatmu:</p>
-                    <ul class="list-unstyled">
-                        <li><a href="jurusan/tkj" class="jurusan-link">Teknik Komputer dan Jaringan</a></li>
-                        <li><a href="jurusan/tsm" class="jurusan-link">Teknik Sepeda Motor</a></li>
-                        <li><a href="jurusan/akuntansi" class="jurusan-link">Akuntansi</a></li>
-                    </ul>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -137,32 +140,13 @@
         transition: color 0.3s ease;
     }
 
-    .jurusan-link {
-        position: relative;
-        color: inherit;
-        text-decoration: none;
-    }
-
+    /* Hapus hover after untuk jurusan-link */
     .jurusan-link::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        bottom: -2px;
-        left: 0;
-        background-color: #0d6efd;
-        visibility: hidden;
-        transform: scaleX(0);
-        transition: all 0.3s ease-in-out;
-    }
-
-    .jurusan-link:hover::after {
-        visibility: visible;
-        transform: scaleX(1);
+        display: none;
     }
 
     .jurusan-link:hover {
-        color: #0d6efd; /* Warna teks saat dihover */
+        color: inherit; /* Tidak ada perubahan warna saat dihover */
     }
 
     .card-header {
@@ -176,6 +160,7 @@
         font-size: 2rem; /* Adjust icon size */
     }
 </style>
+
 
 <!-- 
 <div class="container py-5 keunggulan-section">
@@ -280,7 +265,7 @@
 
     // Data untuk Pie Chart
     const data = {
-        labels: [' 11%', 'Bekerja 45%', 'Magang 2%', 'Melanjutkan Kuliah 8%', 'Pelatihan 3%', 'Proses Mencari Kerja 31%'],
+        labels: ['Wirausaha 11%', 'Bekerja 45%', 'Magang 2%', 'Melanjutkan Kuliah 8%', 'Pelatihan 3%', 'Proses Mencari Kerja 31%'],
         datasets: [{
             data: [11, 45, 2, 8, 3, 31],
             backgroundColor: [
@@ -583,106 +568,45 @@
                 <a href="{{route('prestasi.index')}}" class="btn btn- text-white rounded-pill" style="background-color: #FFAD60;">Lihat Selengkapnya</a>
             </div>
         </div>
-
-
     </div>
 </section>
-<section id="news" class="bg-light py-5">
+<section id="berita" class="bg-light py-5">
     <div class="container">
         <h2 class="display-4 text-center mb-4">Berita</h2>
         <div class="row">
-            <!-- Berita 1 -->
-            <div class="col-md-4 mb-3" data-aos="zoom-in">
-                <div class="card h-100 shadow border-light rounded">
-                    <img src="{{ asset('assets/images/Picture1.png') }}" class="card-img-top" alt="Berita 1" style="height: 150px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">KUNJUNGAN PEJABAT KE SMK GEMA KARYA BAHANA</h5>
-                        <p class="card-text d-flex align-items-center justify-content-center" style="min-height: 60px;">Kunjungan & Sambutan dari Perwakilan Anggota Disnaker untuk Pembukaan Job Fair di SMK Gema Karya Bahana dan Kunjungan & Sambutan oleh Pak Camat untuk[…]...</p>
-                    </div>
-                    <div class="card-footer text-muted text-center">
-                        <small>Diposting pada 28 Sep 2024</small>
-                    </div>
-                </div>
-            </div>
-            <!-- Berita 2 -->
-            <div class="col-md-4 mb-3" data-aos="zoom-in">
-                <div class="card h-100 shadow border-light rounded">
-                    <img src="{{ asset('assets/images/Picture2.jpg') }}" class="card-img-top" alt="Berita 2" style="height: 150px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">KUNJUNGAN BAPAK WALIKOTA BEKASI</h5>
-                        <p class="card-text d-flex align-items-center justify-content-center" style="min-height: 60px;">PELETAKAN BATU PERTAMA MASJID SMK GEMA KARYA BAHANA […]...</p>
-                    </div>
-                    <div class="card-footer text-muted text-center">
-                        <small>Diposting pada 28 Sep 2024</small>
-                    </div>
-                </div>
-            </div>
-            <!-- Berita 3 -->
-            <div class="col-md-4 mb-3" data-aos="zoom-in">
-                <div class="card h-100 shadow border-light rounded">
-                    <img src="{{asset('assets/images/Picture3.png')}}" class="card-img-top" alt="Berita 3" style="height: 150px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Workshop Penyuluhan Narkoba Pionir & Workshop Self Grooming Mitra Medika</h5>
-                        <p class="card-text d-flex align-items-center justify-content-center" style="min-height: 60px;">SMK Gema Karya Bahana Jakarta mengadakan kegiatan Workshop […]...</p>
-                    </div>
-                    <div class="card-footer text-muted text-center">
-                        <small>Diposting pada 28 Sep 2024</small>
+            @foreach($berita as $item)
+                <div class="col-md-4 mb-3" data-aos="zoom-in">
+                    <div class="card h-100 shadow border-light rounded">
+                        <img src="{{ asset('assets/images/' . $item->gambar) }}" class="card-img-top" alt="{{ $item->title }}" style="height: 150px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ $item->title }}</h5>
+                            <p class="card-text d-flex align-items-center justify-content-center" style="min-height: 60px;">
+                                {{ Str::limit($item->description, 100) }} [...]
+                            </p>
+                        </div>
+                        <div class="card-footer text-muted text-center">
+                            <small>Diposting pada {{ $item->created_at->format('d M Y') }}</small>
+                            <div class="mt-2">
+                                <!-- Tombol Edit dan Hapus -->
+                                @if(Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'operator')
+                                    <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('berita.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-        <!-- Baris Kedua Berita -->
-        <div class="row">
-            <!-- Berita 4 -->
-            <div class="col-md-4 mb-3" data-aos="zoom-in">
-                <div class="card h-100 shadow border-light rounded">
-                    <img src="{{asset('assets/images/Picture5.jpg')}}" class="card-img-top" alt="Berita 4" style="height: 150px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Bekasi Campus Expo</h5>
-                        <p class="card-text d-flex align-items-center justify-content-center" style="min-height: 60px;">SMK Gema Karya Bahana mengadakan Kegiatan Campus Expo […]...</p>
-                    </div>
-                    <div class="card-footer text-muted text-center">
-                        <small>Diposting pada 28 Sep 2024</small>
-                    </div>
-                </div>
-            </div>
-            <!-- Berita 5 -->
-            <div class="col-md-4 mb-3" data-aos="zoom-in">
-                <div class="card h-100 shadow border-light rounded">
-                    <img src="{{asset('assets/images/Picture6.jpg')}}" class="card-img-top" alt="Berita 5" style="height: 150px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">KUNJUNGAN INDUSTRI KE PT OTSUKA AMERTA</h5>
-                        <p class="card-text d-flex align-items-center justify-content-center" style="min-height: 60px;">SMK Gema Karya Bahana melakaukan kunjungan ke PT OTSUKA AMERTA[…]..</p>
-                    </div>
-                    <div class="card-footer text-muted text-center">
-                        <small>Diposting pada 28 Sep 2024</small>
-                    </div>
-                </div>
-            </div>
-            <!-- Berita 6 -->
-            <div class="col-md-4 mb-3" data-aos="zoom-in">
-                <div class="card h-100 shadow border-light rounded">
-                    <img src="{{asset('assets/images/Picture7.jpg')}}" class="card-img-top" alt="Berita 6" style="height: 150px; object-fit: cover;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Workshop Pencegahan Pergaulan Bebas LGBT dan HIV/AIDS</h5>
-                        <p class="card-text d-flex align-items-center justify-content-center" style="min-height: 60px;">SMK Gema Karya Mengadakan Workshop kembali tentang Pergaulan bebas[…]...</p>
-                    </div>
-                    <div class="card-footer text-muted text-center">
-                        <small>Diposting pada 28 Sep 2024</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-        <!-- Tombol Lihat Lainnya -->
         <div class="text-center mt-4">
-        <a href="{{ route('berita.index') }}" class="btn btn- text-white" style="background-color: #FFAD60;">Baca Selengkapnya<i class="fas fa-arrow-right"></i></a>
+            <a href="{{ route('berita.index') }}" class="btn text-white" style="background-color: #FFAD60;">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
-
 <!-- lokasi -->
 <div class="container mt-5" id="lokasiSection">
     <div class="row">
@@ -746,25 +670,23 @@
                         </tr>
                     </thead>
                     <tbody> -->
-                        @foreach ($news as $item)
-                            <tr>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ Str::limit($item->content, 50) }}</td>
-                                <td>
-                                    <a href="{{ route('admin.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                                    <form action="{{ route('admin.delete', $item->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+                    <!-- @if (Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'operator')
+    @foreach ($berita as $item)
+        <tr>
+            <td>{{ $item->title }}</td>
+            <td>{{ Str::limit($item->content, 50) }}</td>
+            <td>
+                <a href="{{ route('operator.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                <form action="{{ route('operator.destroy', $item->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </form>
+            </td>
+        </tr>
+    @endforeach
+@endif -->
+
  <!-- Script jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -809,3 +731,4 @@
     });
 </script>
 @endsection
+

@@ -9,17 +9,12 @@
         @csrf
     
         <div class="mb-3">
-            <label for="name" class="form-label">Title</label>
-            <input type="text" class="form-control" id="name" name="title" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="name" class="form-label">Date</label>
-            <input type="date" class="form-control" id="name" name="date" required>
+            <label for="name" class="form-label">nama</label>
+            <input type="text" class="form-control" id="name" name="nama" required>
         </div>
         <div class="mb-3">
-            <label for="name" class="form-label">description</label>
-            <textarea type="text" class="form-control" id="name" name="description" ></textarea>
+            <label for="name" class="form-label">deskripsi</label>
+            <textarea type="text" class="form-control" id="name" name="deskripsi" ></textarea>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Gambar</label>

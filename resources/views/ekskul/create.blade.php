@@ -14,12 +14,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="name" class="form-label">Jabatan</label>
-            <input type="text" class="form-control" id="name" name="jabatan" >
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">TIpe</label>
-            <input type="text" class="form-control" id="name" name="tipe" >
+            <label for="name" class="form-label">Deskripsi</label>
+            <textarea type="text" class="form-control" id="name" name="deskripsi" ></textarea>
         </div>
         <div class="mb-3">
             <label for="name" class="form-label">Gambar</label>

@@ -2,15 +2,32 @@
 
 @section('content')
 <div class="container">
-    <h2 class="display-4 text-center mb-4"></h2>
+    <h2 class="display-4 text-center mb-4">Berita</h2>
+
+    <!-- Hanya tampilkan tombol tambah berita untuk operator -->
+    @if(Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'operator')
+    <div class="mb-3">
+        <a href="{{ route('berita.create') }}" class="btn btn-primary">Tambah Berita</a>
+    </div>
+    @endif
+
     <div class="row">
         @foreach($berita as $item)
         <div class="col-md-4 mb-3" data-aos="zoom-in">
             <div class="card h-100 shadow border-light rounded">
-                <img src="{{ asset('assets/images/' . $item->gambar) }}" class="card-img-top" alt="{{ $item->title }}" style="height: 150px; object-fit: cover;">
+                <img src="{{ asset('assets/images/' . ($item->gambar ?? 'default-image.jpg')) }}" class="card-img-top" alt="{{ $item->title }}" style="height: 150px; object-fit: cover;">
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ $item->title }}</h5>
                     <p class="card-text d-flex align-items-center justify-content-center" style="min-height: 60px;">{{ Str::limit($item->description, 100) }}</p>
+
+                    <!-- Menampilkan tag -->
+                    @if($item->tags)
+                        <div class="tags">
+                            @foreach($item->tags as $tag)
+                                <span class="badge bg-secondary">{{ $tag->name }}</span>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
                 <div class="card-footer text-muted text-center">
                     <small>Diposting pada {{ $item->created_at->format('d M Y') }}</small>
@@ -21,6 +38,18 @@
                                 data-image="{{ asset('assets/images/' . $item->gambar) }}">
                             Baca Selengkapnya
                         </button>
+
+                        <!-- Hanya tampilkan opsi edit dan hapus untuk operator -->
+                        @if(Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'operator')
+                        <div class="mt-2">
+                            <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-warning w-100">Edit</a>
+                            <form action="{{ route('berita.destroy', $item->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger w-100">Hapus</button>
+                            </form>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class GuruController extends Controller
 {
@@ -13,11 +12,9 @@ class GuruController extends Controller
     {
         // Mengambil semua data guru dari database
         $gurus = Guru::all();
-        // dd(Auth::user());
         // Mengembalikan tampilan dengan data guru
         return view('guru.index', compact('gurus'));
     }
-
 
     public function create()
     {
@@ -26,7 +23,29 @@ class GuruController extends Controller
 
     public function store(Request $request)
     {
-        Guru::create($request->all());
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string',
+            'jabatan' => 'required|string',
+            'tipe' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Menyimpan gambar jika ada
+        $path = null;
+        if ($request->hasFile('gambar')) {
+            $imageName = time() . '.' . $request->gambar->extension(); // Nama file unik
+            $request->gambar->move(public_path('assets/images'), $imageName); // Simpan di public/assets/images
+            $path = 'assets/images/' . $imageName; // Path untuk disimpan di database
+        }
+
+        // Menyimpan data guru
+        Guru::create([
+            'nama' => $request->nama,
+            'jabatan' => $request->jabatan,
+            'tipe' => $request->tipe,
+            'gambar' => $path, // Simpan path gambar
+        ]);
 
         return redirect()->route('guru.index')->with('success', 'Guru berhasil ditambahkan');
     }
@@ -40,7 +59,21 @@ class GuruController extends Controller
     public function update(Request $request, $id)
     {
         $guru = Guru::findOrFail($id);
-        $guru->update($request->all());
+        
+        // Inisialisasi variabel $image dengan gambar lama
+        $image = $guru->gambar;
+
+        if ($request->hasFile('gambar')) {
+            // Jika ada gambar baru, simpan gambar tersebut
+            $imageName = time() . '.' . $request->gambar->extension(); // Nama file unik
+            $request->gambar->move(public_path('assets/images'), $imageName); // Simpan di public/assets/images
+            $image = 'assets/images/' . $imageName; // Update path
+        }
+
+        // Update data guru, termasuk gambar baru jika ada
+        $guru->update($request->except('gambar')); // Update data selain gambar
+        $guru->gambar = $image; // Set gambar baru
+        $guru->save(); // Simpan perubahan
 
         return redirect()->route('guru.index')->with('success', 'Guru berhasil diperbarui');
     }
@@ -53,4 +86,3 @@ class GuruController extends Controller
         return redirect()->route('guru.index')->with('success', 'Guru berhasil dihapus');
     }
 }
-

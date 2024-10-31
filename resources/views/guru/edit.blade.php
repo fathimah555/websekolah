@@ -5,7 +5,7 @@
 <div class="container mt-5">
     <h1>Edit guru</h1>
 
-    <form action="{{ route('guru.update',$guru->id) }}" method="POST">
+    <form action="{{ route('guru.update',$guru->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">

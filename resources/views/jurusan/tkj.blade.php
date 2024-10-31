@@ -55,17 +55,6 @@
                         <li><a class="dropdown-item text-body" href="{{ route('guru.index') }}"><i class="fas fa-users"></i> Guru dan Tenaga Pendidik</a></li>
                     </ul>
                 </li>
-                <!-- Jurusan Dropdown -->
-                <li class="nav-item dropdown mx-2">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="jurusanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-tools"></i> Jurusan
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="jurusanDropdown">
-                        <li><a class="dropdown-item text-body" href="{{ url('/jurusan/tsm') }}"><i class="fas fa-motorcycle"></i> TEKNIK SEPEDA MOTOR</a></li>
-                        <li><a class="dropdown-item text-body" href="{{ url('/jurusan/tkj') }}"><i class="fas fa-network-wired"></i> TEKNIK KOMPUTER DAN JARINGAN</a></li>
-                        <li><a class="dropdown-item text-body" href="{{ url('/jurusan/akuntansi') }}"><i class="fas fa-calculator"></i> AKUNTANSI</a></li>
-                    </ul>
-                </li>
                 <!-- Kesiswaan Dropdown -->
                 <li class="nav-item dropdown mx-2">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="kesiswaanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -75,11 +64,6 @@
                         <li><a class="dropdown-item text-body" href="{{route('prestasi.index')}}"><i class="fas fa-trophy"></i> Prestasi</a></li>
                         <li><a class="dropdown-item text-body" href="{{route('ekskul.index')}}"><i class="fas fa-futbol"></i> Ekskul</a></li>
                     </ul>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link text-white" href="{{ route('fasilitas.index') }}">
-                        <i class="fas fa-building"></i> Fasilitas
-                    </a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="nav-link text-white" href="{{ route('events.index') }}">
@@ -169,6 +153,13 @@
         </div>
     </div>
 </div>
+    <!-- Back Button -->
+    <div class="text-center mb-4">
+        <a href="{{ url('jurusan') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </a>
+    </div>
+
 <footer class="text-white text-center py-4 mt-4" style="background-color: #E8B86D;">
     <div class="container">
         <div class="row">

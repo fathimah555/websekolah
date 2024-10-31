@@ -5,9 +5,10 @@
 <div class="container mt-5">
     <h1>Tambah guru</h1>
 
-    <form action="{{ route('guru.store') }}" method="POST">
+    <form action="{{ route('guru.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-    
+        @method('POST')
+        
         <div class="mb-3">
             <label for="name" class="form-label">Nama Guru</label>
             <input type="text" class="form-control" id="name" name="nama" required>
