@@ -40,19 +40,19 @@ class EkskulSeeder extends Seeder
         Ekskul::create([
             'nama' => ' Bola Basket',
             'deskripsi' => 'kegiatan ini bertujuan untuk melatih jiwa kepemimpinan diri kita',
-            'gambar' => 'https://tse4.mm.bing.net/th?id=OIP.JuhsMEHpycuQd1EBm-eMAAHaFj&pid=Api&P=0&h=180',
+            'gambar' => 'bolebasker.jpeg',
         ]);
 
         Ekskul::create([
             'nama' => 'Badmintoon',
             'deskripsi' => ' olahraga yang melatih ketangkasan, kecepatan, dan strategi. Ekskul ini sangat cocok bagi siswa yang ingin mengasah kemampuan bermain bulu tangkis, baik secara individu maupun ganda.a',
-            'gambar' => 'https://tse4.mm.bing.net/th?id=OIP.E8DsWJ5tqoi5dfnt8xKKSQHaEK&pid=Api&P=0&h=180',
+            'gambar' => 'badmitoon.jpeg',
         ]);
 
         Ekskul::create([
             'nama' => 'Paskibra',
             'deskripsi' => 'ekskul yang bertujuan untuk melatih siswa dalam disiplin, kerja sama tim, dan cinta tanah air',
-            'gambar' => 'http://ex-school.com/storage/posts/March2019/VPXis1x1dSqZRHoIyl8g.jpg',
+            'gambar' => 'paskibra.jpeg',
         ]);
 
         Ekskul::create([
@@ -64,7 +64,7 @@ class EkskulSeeder extends Seeder
         Ekskul::create([
             'nama' => 'English Club',
             'deskripsi' => ' ekstrakurikuler yang mengajarkan tarian tradisional daerah yang melatih gerakan cepat dan sinkronisasi antar anggota.',
-            'gambar' => 'https://smabmone.sch.id/wp-content/uploads/2018/12/sman1babakanmadang-smabmone-bmone-ekstrakurikuler-englishclub-3.jpg',
+            'gambar' => 'englishh.jpeg',
         ]);
 
         Ekskul::create([

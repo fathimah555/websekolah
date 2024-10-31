@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('visi');
             $table->text('misi');
             $table->timestamps();
-        });
+        }
+    );
     }
 
     /**

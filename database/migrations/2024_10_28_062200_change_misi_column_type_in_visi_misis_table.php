@@ -10,13 +10,13 @@ return new class extends Migration
     {
         Schema::table('visi-_misis', function (Blueprint $table) {
             $table->text('misi')->change(); // Ubah kolom misi menjadi text
-        });e
+        });
     }
 
     public function down(): void
     {
         Schema::table('visi-_misis', function (Blueprint $table) {
-            $table->string('misi')->change(); // Kembalikan ke string jika rollback
+            $table->text('misi')->change(); // Kembalikan ke string jika rollback
         });
     }
 };
