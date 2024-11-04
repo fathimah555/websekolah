@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Guru;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Support\Facades\DB; 
+// use Illuminate\Support\Facades\DB; 
 use Illuminate\Database\Seeder;
 
 
@@ -18,16 +18,16 @@ class GuruSeeder extends Seeder
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Muthmainah, S. Pd'],
-            ['jabatan' => 'Kepala Sekolah', 'gambar' => '1729490161.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Kepala Sekolah', 'gambar' => 'kepalasekolahh.png', 'tipe' => 'struktur']
         );
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Nailil Muna Atalyna, S.S, M. Pd'],
-            ['jabatan' => 'Wakil Kepala Sekolah', 'gambar' => '1730080077.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Wakil Kepala Sekolah', 'gambar' => 'wakil1.png', 'tipe' => 'struktur']
     );
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Eka  Sudiyanti, M. Pd'],
-            ['jabatan' => 'Waka. Bid. SarPras', 'gambar' => '1730080224.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Waka. Bid. SarPras', 'gambar' => 'wakil2.png', 'tipe' => 'struktur']
         );
 
         DB::table('gurus')->updateOrInsert(
