@@ -28,7 +28,7 @@ class EkskulSeeder extends Seeder
         Ekskul::create([
             'nama' => 'Rohani Islam',
             'deskripsi' => ' ekskul yang bertujuan untuk memperdalam pengetahuan agama Islam dan meningkatkan spiritualitas siswa.',
-            'gambar' => 'img5.jpg',
+            'gambar' => 'img5.JPG',
         ]);
 
         Ekskul::create([
@@ -70,7 +70,7 @@ class EkskulSeeder extends Seeder
         Ekskul::create([
             'nama' => 'Futsal',
             'deskripsi' => 'olahraga yang mengasah keterampilan bermain bola di lapangan kecil dengan intensitas tinggi ',
-            'gambar' => 'img11.jpg',
+            'gambar' => 'img11.JPG',
         ]);
 
 
