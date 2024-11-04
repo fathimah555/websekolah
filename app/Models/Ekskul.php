@@ -9,4 +9,5 @@ class Ekskul extends Model
 {
     use HasFactory;
 
-e}
+    protected $fillable = ['nama', 'deskripsi', 'gambar'];
+}
