@@ -40,7 +40,7 @@ class EkskulSeeder extends Seeder
         Ekskul::create([
             'nama' => ' Bola Basket',
             'deskripsi' => 'kegiatan ini bertujuan untuk melatih jiwa kepemimpinan diri kita',
-            'gambar' => 'bolebasker.jpeg',
+            'gambar' => 'bolabasket.jpeg',
         ]);
 
         Ekskul::create([

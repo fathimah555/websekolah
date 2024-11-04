@@ -23,8 +23,6 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         Jurusan::create($request->all());
-
-
         return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil ditambahkan');
     }
 
@@ -37,15 +35,12 @@ class JurusanController extends Controller
     public function update(Request $request, $id)
     {
         $jurusan = Jurusan::findOrFail($id);
-        if($request->hasFile('gambar')){
+        if ($request->hasFile('gambar')) {
             $image = $request->gambar->getClientOriginalName();
             $request->gambar->move(public_path('assets/images'), $image);
+            $jurusan->gambar = $image; // Pastikan gambar diperbarui
         }
-        $jurusan->update($request->all());
-        $jurusan->gambar = $image;
-        $jurusan->save();
-
-
+        $jurusan->update($request->except('gambar')); // Mengupdate semua kecuali gambar
         return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil diperbarui');
     }
 
@@ -53,28 +48,22 @@ class JurusanController extends Controller
     {
         $jurusan = Jurusan::findOrFail($id);
         $jurusan->delete();
-
         return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil dihapus');
     }
 
-    // Menambahkan metode tsm untuk detail jurusan
+    // Menambahkan metode untuk detail jurusan
     public function tsm()
     {
-        return view('jurusan.tsm');
-    }
-    public function tkj()
-    {
-        return view('jurusan.tkj');
-    }
-    public function akuntansi()
-    {
-        return view('jurusan.akuntansi');
+        return view('jurusan.tsm'); // Halaman detail TSM
     }
 
-    public function show($id)
+    public function tkj()
     {
-        $jurusan = Jurusan::findOrFail($id);
-        return view('jurusan.show', compact('jurusan'));
+        return view('jurusan.tkj'); // Halaman detail TKJ
     }
-    
+
+    public function akuntansi()
+    {
+        return view('jurusan.akuntansi'); // Halaman detail Akuntansi
+    }
 }

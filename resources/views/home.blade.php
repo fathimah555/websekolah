@@ -490,7 +490,7 @@
 
 <section id="penghargaan" class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4">Prestasi Sekolah</h2>
+        <h2 class="text-center mb-4">Prestasi Sekolah</ h2>
         <div id="carouselPenghargaan" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-aos="fade-left" data-aos-offset="500" data-aos-duration="500">

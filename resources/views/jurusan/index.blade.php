@@ -14,23 +14,22 @@
             <div class="col mb-4 d-flex"> <!-- d-flex untuk memastikan tinggi kolom sama -->
                 <div class="card h-100 shadow border-0 rounded w-100"> <!-- w-100 untuk memastikan kartu memenuhi lebar kolom -->
                     <img src="{{ asset('assets/images/' . $j->gambar) }}" class="card-img-top" alt="{{ $j->nama }}" style="height: 200px; object-fit: cover;">
-                    <div class="card-body text-center d-flex flex-column"> <!-- flex-column untuk menyusun konten vertikal -->
+                    <div class="card-body text-center d-flex flex-column">
                         <h5 class="card-title font-weight-bold">{{ $j->nama }}</h5>
                         <p class="card-text text-muted">{{ $j->deskripsi }}</p>
                         <div class="mt-auto"></div> <!-- Spacer untuk menjaga konten tetap teratur -->
 
+                        <!-- Tombol Lihat Selengkapnya -->
+                        <a href="{{ route('jurusan.' . strtolower($j->nama)) }}" class="btn btn-warning mt-2">Lihat Selengkapnya</a>
+
                         @if(Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'admin')
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="{{ route('jurusan.edit', $j->id) }}" class="btn btn-warning w-100">Edit</a>
-                                </div>
-                                <div class="col-6">
-                                    <form action="{{ route('jurusan.destroy', $j->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE') <!-- Pastikan untuk menyertakan metode DELETE -->
-                                        <button type="submit" class="btn btn-danger w-100">Hapus</button>
-                                    </form>
-                                </div>
+                            <div class="mt-2"> <!-- Tambahkan margin atas untuk jarak -->
+                                <a href="{{ route('jurusan.edit', $j->id) }}" class="btn btn-warning w-100 mb-2">Edit</a>
+                                <form action="{{ route('jurusan.destroy', $j->id) }}" method="POST" class="w-100">
+                                    @csrf
+                                    @method('DELETE') <!-- Pastikan untuk menyertakan metode DELETE -->
+                                    <button type="submit" class="btn btn-danger w-100">Hapus</button>
+                                </form>
                             </div>
                         @endif
                     </div>
