@@ -17,63 +17,63 @@ class GuruSeeder extends Seeder
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Muthmainah, S. Pd'],
-            ['jabatan' => 'Kepala Sekolah', 'gambar' => 'kepala sekolahh.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Kepala Sekolah', 'gambar' => 'kepalasekolahh.png', 'tipe' => 'struktur']
         );
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Nailil Muna Atalyna, S.S, M. Pd'],
-            ['jabatan' => 'Wakil Kepala Sekolah', 'gambar' => 'wakil 1.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Wakil Kepala Sekolah', 'gambar' => 'wakil1.png', 'tipe' => 'struktur']
     );
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Eka  Sudiyanti, M. Pd'],
-            ['jabatan' => 'Waka. Bid. SarPras', 'gambar' => 'wakil 2.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Waka. Bid. SarPras', 'gambar' => 'wakil2.png', 'tipe' => 'struktur']
         );
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Dede Taufik A, S.Si, M.Pd'],
-            ['jabatan' => 'Waka. Bid. Hubind', 'gambar' => 'wakil 3.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Waka. Bid. Hubind', 'gambar' => 'wakil3.png', 'tipe' => 'struktur']
     );
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Adrian A. Md. Kom'],
-            ['jabatan' => 'Waka. Bid. Kesiswaan', 'gambar' => 'wakil 4.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Waka. Bid. Kesiswaan', 'gambar' => 'wakil4.png', 'tipe' => 'struktur']
         );
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Wardah Ulfah F, S. Pd'],
-            ['jabatan' => 'Staf Kurikulum', 'gambar' => 'staf 1.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Staf Kurikulum', 'gambar' => 'staf1.png', 'tipe' => 'struktur']
     );
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Susilo Agus, S.T'],
-            ['jabatan' => 'KA. Prog TSM', 'gambar' => 'staf 2.png', 'tipe' => 'struktur']
+            ['jabatan' => 'KA. Prog TSM', 'gambar' => 'staf2.png', 'tipe' => 'struktur']
         );
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Andriyanne M, S. Kom'],
-            ['jabatan' => 'KA. Prog TKJ', 'gambar' => 'staf 3.png', 'tipe' => 'struktur']
+            ['jabatan' => 'KA. Prog TKJ', 'gambar' => 'staf3 .png', 'tipe' => 'struktur']
     );
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Rosa Amelia A, M. Pd'],
-            ['jabatan' => 'KA. Prog AK', 'gambar' => 'staf 4.png', 'tipe' => 'struktur']
+            ['jabatan' => 'KA. Prog AK', 'gambar' => 'staf4.png', 'tipe' => 'struktur']
     );
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'H. Maswan'],
-            ['jabatan' => 'Staf SarPras', 'gambar' => 'staf 5.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Staf SarPras', 'gambar' => 'staf5.png', 'tipe' => 'struktur']
     );
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Septian Basharah, S. Kom'],
-            ['jabatan' => 'Pembina Osis', 'gambar' => 'staf 6.png', 'tipe' => 'struktur']
+            ['jabatan' => 'Pembina Osis', 'gambar' => 'staf6.png', 'tipe' => 'struktur']
     );
 
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Indah Nur T,S. Pd'],
-            ['jabatan' => 'BK Kelas X', 'gambar' => 'staf 7.png', 'tipe' => 'struktur']
+            ['jabatan' => 'BK Kelas X', 'gambar' => 'staf7.png', 'tipe' => 'struktur']
     );
         DB::table('gurus')->updateOrInsert(
             ['nama' => 'Adi Wahyudianto, S. Pd'],
-            ['jabatan' => 'BK Kelas XI', 'gambar' => 'staf 8.png', 'tipe' => 'struktur']
+            ['jabatan' => 'BK Kelas XI', 'gambar' => 'staf8.png', 'tipe' => 'struktur']
     );
 
 
