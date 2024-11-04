@@ -46,7 +46,6 @@
                 @php
                 $wakilKepalaSekolah = $gurus->where('tipe', 'struktur')->where('jabatan', '!=', 'Kepala Sekolah')->values();
                 @endphp
-
                 @foreach($wakilKepalaSekolah as $wakil)
                     <div class="col-md-3 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="card shadow-sm text-center mb-5" style="border-radius: 15px; width: 100%; max-width: 250px; margin: 0 10px;">
@@ -59,7 +58,7 @@
                                         <div class="col-6">  
                                             <a href="{{ route('guru.edit', $wakil->id) }}" class="btn btn-warning w-100">Edit</a>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-6"> 
                                             <form action="{{ route('guru.destroy', $wakil->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
