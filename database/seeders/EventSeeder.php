@@ -33,26 +33,26 @@ class EventSeeder extends Seeder
         Event::create([
             'title' => 'ClassMeeting 2024',
             'date' => '2024-06-26',
-            'gambar' => 'img9.jpg',
+            'gambar' => 'img9.JPG',
         ]);
     
         
         Event::create([
             'title' => 'Maulid Nabi Muhammad SAW',
             'date' => '2024-03-08',
-            'gambar' => 'img10.jpg',
+            'gambar' => 'img10.JPG',
         ]);
 
         Event::create([
             'title' => 'Hari Sumpah Pemuda',
             'date' => '2024-10-28',
-            'gambar' => 'img12.jpg',
+            'gambar' => 'img12.JPG',
         ]);
 
         Event::create([
             'title' => 'Lomba 17 Agustus',
             'date' => '2024-08-16',
-            'gambar' => 'img13.jpg',
+            'gambar' => 'img13.JPG',
         ]);
     }
 }
