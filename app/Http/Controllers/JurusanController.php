@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Jurusan\Jurusan as JurusanJurusan;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
 
 class JurusanController extends Controller
@@ -10,7 +9,7 @@ class JurusanController extends Controller
     public function index()
     {
         // Mengambil semua data jurusan dari database
-        $jurusan = JurusanJurusan::all();
+        $jurusan = Jurusan::all();
         // Mengembalikan tampilan dengan data jurusan
         return view('jurusan.index', compact('jurusan'));
     }
@@ -30,7 +29,7 @@ class JurusanController extends Controller
         ]);
 
         // Simpan data jurusan
-        JurusanJurusan::create($validatedData);
+        Jurusan::create($validatedData);
 
         // Redirect dengan pesan sukses
         return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil ditambahkan');
@@ -39,7 +38,7 @@ class JurusanController extends Controller
     public function edit($id)
     {
         // Mengambil data jurusan berdasarkan ID
-        $jurusan = JurusanJurusan::findOrFail($id);
+        $jurusan = Jurusan::findOrFail($id);
         return view('jurusan.edit', ['jurusan' => $jurusan, 'isEdit' => true]);
     }
 
@@ -53,7 +52,7 @@ class JurusanController extends Controller
         ]);
 
         // Mencari data jurusan berdasarkan ID
-        $jurusan = JurusanJurusan::findOrFail($id);
+        $jurusan = Jurusan::findOrFail($id);
 
         // Jika ada gambar baru, upload gambar
         if ($request->hasFile('gambar')) {
@@ -81,7 +80,7 @@ class JurusanController extends Controller
     public function destroy($id)
     {
         // Mengambil data jurusan berdasarkan ID
-        $jurusan = JurusanJurusan::findOrFail($id);
+        $jurusan = Jurusan::findOrFail($id);
 
         // Hapus gambar jika ada
         if ($jurusan->gambar) {
