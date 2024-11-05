@@ -82,15 +82,15 @@ class GuruSeeder extends Seeder
     );
     DB::table('gurus')->updateOrInsert(
         ['nama' => 'Mei Wulan N , S. Psi'],
-        ['jabatan' => 'BP-BK', 'gambar' => 'assets/images/', 'tipe' => 'struktur']
+        ['jabatan' => 'BP-BK', 'gambar' => 'assets/images/img14.png', 'tipe' => 'struktur']
     );
     DB::table('gurus')->updateOrInsert(
         ['nama' => 'M. Tamtomo, ST'],
-        ['jabatan' => 'Ketua BKK', 'gambar' => 'assets/images/', 'tipe' => 'struktur']
+        ['jabatan' => 'Ketua BKK', 'gambar' => 'assets/images/img15.jpg', 'tipe' => 'struktur']
     );
     DB::table('gurus')->updateOrInsert(
         ['nama' => 'M. Tarkim R'],
-        ['jabatan' => 'Staf Hubind', 'gambar' => 'assets/images/', 'tipe' => 'struktur']
+        ['jabatan' => 'Staf Hubind', 'gambar' => 'assets/images/img15.jpg', 'tipe' => 'struktur']
     );
 
     }
