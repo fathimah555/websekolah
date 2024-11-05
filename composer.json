@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
+            "App\\": "app/Models",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
