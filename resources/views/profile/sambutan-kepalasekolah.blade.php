@@ -11,7 +11,7 @@
         <div class="row align-items-center">
             <div class="col-md-4 text-center mb-4 mb-md-0">
                 <div data-aos="fade-right" data-aos-duration="1000">
-                    <img src="{{ asset('assets/images/Picture55.png') }}" class="img-fluid shadow" alt="Kepala Sekolah" style="width: 250px; height: 250px; object-fit: cover;">
+                    <img src="{{ asset('assets/images/kepalasekolahh.png') }}" class="img-fluid shadow" alt="Kepala Sekolah" style="width: 250px; height: 250px; object-fit: cover;">
                 </div>
                 <h5 class="text-body mt-3"></h5> 
             </div>
