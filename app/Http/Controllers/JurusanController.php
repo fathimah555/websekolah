@@ -30,7 +30,7 @@ class JurusanController extends Controller
         ]);
 
         // Simpan data jurusan
-        Jurusan::create($validatedData);
+        JurusanJurusan::create($validatedData);
 
         // Redirect dengan pesan sukses
         return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil ditambahkan');
@@ -39,7 +39,7 @@ class JurusanController extends Controller
     public function edit($id)
     {
         // Mengambil data jurusan berdasarkan ID
-        $jurusan = Jurusan::findOrFail($id);
+        $jurusan = JurusanJurusan::findOrFail($id);
         return view('jurusan.edit', ['jurusan' => $jurusan, 'isEdit' => true]);
     }
 
@@ -53,7 +53,7 @@ class JurusanController extends Controller
         ]);
 
         // Mencari data jurusan berdasarkan ID
-        $jurusan = Jurusan::findOrFail($id);
+        $jurusan = JurusanJurusan::findOrFail($id);
 
         // Jika ada gambar baru, upload gambar
         if ($request->hasFile('gambar')) {
@@ -81,7 +81,7 @@ class JurusanController extends Controller
     public function destroy($id)
     {
         // Mengambil data jurusan berdasarkan ID
-        $jurusan = Jurusan::findOrFail($id);
+        $jurusan = JurusanJurusan::findOrFail($id);
 
         // Hapus gambar jika ada
         if ($jurusan->gambar) {
