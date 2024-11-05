@@ -11,7 +11,6 @@ class JurusanController extends Controller
     {
         // Mengambil semua data jurusan dari database
         $jurusan = Jurusan::all();
-        // Mengembalikan tampilan dengan data jurusan
         return view('jurusan.index', compact('jurusan'));
     }
 
