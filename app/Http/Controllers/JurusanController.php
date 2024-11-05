@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jurusan;
+use App\Models\Jurusan\Jurusan as JurusanJurusan;
 use Illuminate\Http\Request;
 
 class JurusanController extends Controller
@@ -10,7 +10,7 @@ class JurusanController extends Controller
     public function index()
     {
         // Mengambil semua data jurusan dari database
-        $jurusan = Jurusan::all();
+        $jurusan = JurusanJurusan::all();
         // Mengembalikan tampilan dengan data jurusan
         return view('jurusan.index', compact('jurusan'));
     }
