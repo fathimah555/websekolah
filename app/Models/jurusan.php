@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Jurusan;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jurusan extends Model
+class jurusan extends Model
 {
-    use HasFactory;
+    protected $table = 'jurusan';
 
     protected $fillable = ['nama', 'deskripsi', 'gambar'];
 }

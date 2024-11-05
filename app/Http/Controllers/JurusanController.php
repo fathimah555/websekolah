@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator; // Untuk validasi
 
 class JurusanController extends Controller
 {
