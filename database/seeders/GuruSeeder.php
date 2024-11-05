@@ -76,7 +76,22 @@ class GuruSeeder extends Seeder
             ['nama' => 'Adi Wahyudianto, S. Pd'],
             ['jabatan' => 'BK Kelas XI', 'gambar' => 'assets/images/staf8.png', 'tipe' => 'struktur']
     );
-
+    DB::table('gurus')->updateOrInsert(
+        ['nama' => 'RT Sinta W, S. Pd'],
+        ['jabatan' => 'Pembina Rohis', 'gambar' => 'assets/images/staf9.png', 'tipe' => 'struktur']
+    );
+    DB::table('gurus')->updateOrInsert(
+        ['nama' => 'Mei Wulan N , S. Psi'],
+        ['jabatan' => 'BP-BK', 'gambar' => 'assets/images/', 'tipe' => 'struktur']
+    );
+    DB::table('gurus')->updateOrInsert(
+        ['nama' => 'M. Tamtomo, ST'],
+        ['jabatan' => 'Ketua BKK', 'gambar' => 'assets/images/', 'tipe' => 'struktur']
+    );
+    DB::table('gurus')->updateOrInsert(
+        ['nama' => 'M. Tarkim R'],
+        ['jabatan' => 'Staf Hubind', 'gambar' => 'assets/images/', 'tipe' => 'struktur']
+    );
 
     }
 }
