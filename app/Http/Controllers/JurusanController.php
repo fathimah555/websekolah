@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jurusan; // Pastikan model Jurusan sudah ada
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator; // Untuk validasi
 
 class JurusanController extends Controller
 {
@@ -22,32 +23,79 @@ class JurusanController extends Controller
 
     public function store(Request $request)
     {
-        Jurusan::create($request->all());
+        // Validasi data yang masuk
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar
+        ]);
+
+        // Simpan data jurusan
+        Jurusan::create($validatedData);
+
+        // Redirect dengan pesan sukses
         return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil ditambahkan');
     }
 
     public function edit($id)
     {
+        // Mengambil data jurusan berdasarkan ID
         $jurusan = Jurusan::findOrFail($id);
-        return view('jurusan.edit', ['jurusan' => $jurusan]);
+        return view('jurusan.edit', ['jurusan' => $jurusan, 'isEdit' => true]);
     }
 
     public function update(Request $request, $id)
     {
+        // Validasi data yang masuk
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar
+        ]);
+
+        // Mencari data jurusan berdasarkan ID
         $jurusan = Jurusan::findOrFail($id);
+
+        // Jika ada gambar baru, upload gambar
         if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if ($jurusan->gambar) {
+                $oldImagePath = public_path('assets/images/') . $jurusan->gambar;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath); // Menghapus gambar lama
+                }
+            }
+
+            // Mengambil nama file gambar dan menyimpannya
             $image = $request->gambar->getClientOriginalName();
             $request->gambar->move(public_path('assets/images'), $image);
-            $jurusan->gambar = $image; // Pastikan gambar diperbarui
+            $validatedData['gambar'] = $image; // Menyimpan nama gambar baru
         }
-        $jurusan->update($request->except('gambar')); // Mengupdate semua kecuali gambar
+
+        // Mengupdate data jurusan
+        $jurusan->update($validatedData);
+
+        // Redirect dengan pesan sukses
         return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil diperbarui');
     }
 
     public function destroy($id)
     {
+        // Mengambil data jurusan berdasarkan ID
         $jurusan = Jurusan::findOrFail($id);
+
+        // Hapus gambar jika ada
+        if ($jurusan->gambar) {
+            $imagePath = public_path('assets/images/') . $jurusan->gambar;
+            if (file_exists($imagePath)) {
+                unlink($imagePath); // Menghapus gambar dari direktori
+            }
+        }
+
+        // Menghapus data jurusan
         $jurusan->delete();
+
+        // Redirect dengan pesan sukses
         return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil dihapus');
     }
 
