@@ -11,6 +11,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\PrestasiController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\VisiMisiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,26 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/update/{id}', [AdminController::class, 'update'])->name('update')->middleware('auth:admin');
     Route::delete('/destroy/{id}', [AdminController::class, 'destroy'])->name('destroy')->middleware('auth:admin');
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+
+    // Rute untuk mengupdate pengaturan (menggunakan metode PUT)
+    Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');
+    
+    // Rute untuk menampilkan formulir pembuatan pengguna baru
+    Route::get('admin/settings/create', [SettingsController::class, 'create'])->name('settings.create');
+    
+
+   Route::post('admin/settings', [SettingsController::class, 'store'])->name('settings.store');
+    
+    // Rute untuk mengedit pengguna
+    Route::get('admin/settings/{user}/edit', [SettingsController::class, 'edit'])->name('settings.edit');
+    
+    // Rute untuk memperbarui data pengguna (menggunakan metode PUT)
+    Route::put('admin/settings/{user}', [SettingsController::class, 'update'])->name('settings.update');
+    
+    // Rute untuk menghapus pengguna
+    Route::delete('admin/settings/{user}', [SettingsController::class, 'destroy'])->name('settings.destroy');
 });
 
 // Operator routes 
@@ -151,4 +172,3 @@ Route::get('/profile/sambutan-kepalasekolah', function () {
 Route::get('/visimisi/visi-misi', function () {
     return view('visimisi.visi-misi');
 });
-

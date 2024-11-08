@@ -10,7 +10,7 @@
         @method('PUT') <!-- Menambahkan metode PUT untuk update -->
 
         <div class="mb-3">
-            <label for="name" class="form-label">Nama Jurusan</label>
+            <label for="name" class="form-label">Nama</label>
             <input type="text" class="form-control" id="name" name="nama" value="{{ $jurusan->nama }}" required>
         </div>
 

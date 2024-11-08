@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\LoginHistory;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,31 +28,41 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-    
+
         $credentials = $request->only('email', 'password');
-    
+
         // Coba login dengan kredensial
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-    
-            // Cek role apakah admin atau operator
-            if ($user->role && $user->role->name === 'admin') {
+
+            // Cek apakah user memiliki role admin atau operator
+            if ($user->hasRole('admin')) {
+                // Redirect ke dashboard admin
                 return redirect()->route('admin.dashboard')->with('success', 'Selamat datang, Admin!');
-            } elseif ($user->role && $user->role->name === 'operator') {
-                // Jika role adalah operator, redirect ke halaman berita operator
-                return redirect()->route('berita.index')->with('success', 'Selamat datang, Operator!');
+            } elseif ($user->hasRole('operator')) {
+                // Redirect ke dashboard operator
+                return redirect()->route('operator.dashboard')->with('success', 'Selamat datang, Operator!');
+            } else {
+                // Jika bukan admin atau operator, redirect ke halaman home dengan pesan info
+                return redirect()->intended('/home')->with('info', 'Anda tidak memiliki akses ke halaman ini.');
             }
-    
-            // Jika bukan admin atau operator, redirect ke halaman home
-            return redirect()->intended('/home')->with('info', 'Anda tidak memiliki akses ke halaman ini.');
         }
-    
+
         // Jika login gagal, kembalikan ke halaman login dengan pesan error
         return back()->withErrors([
             'email' => 'Kredensial yang diberikan tidak cocok dengan catatan kami.',
         ]);
     }
-    
+
+    protected function authenticated(Request $request, $user)
+    {
+        // Cek role setelah login
+        if ($user->role != 'admin') {
+            // Logout pengguna yang tidak memiliki role admin
+            Auth::logout(); 
+            return redirect()->route('home')->with('error', 'Anda bukan admin!');
+        }
+    }
 
     public function logout(Request $request)
     {

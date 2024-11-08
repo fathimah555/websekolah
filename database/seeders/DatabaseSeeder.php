@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
-use App\Models\RoleUser;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,47 +14,41 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Membuat role admin dan operator
         $role_admin = Role::create(['name' => 'admin']);
         $role_operator = Role::create(['name' => 'operator']);
 
-
+        // Membuat user admin dan operator
         $user_admin = User::create([
             'name'=> 'admin',
             'email'=> 'admin@gmail.com',
             'password'=> Hash::make('admin')
-           ]);
+        ]);
            
         $user_operator = User::create([
             'name'=> 'operator',
             'email'=> 'operator@gmail.com',
             'password'=> Hash::make('operator')
-           ]);
-    
-           RoleUser::create([
-            'user_id' => $user_admin->id,
-            'role_id' => $role_admin->id,
-           ]);
-           RoleUser::create([
-            'user_id' => $user_operator->id,
-            'role_id' => $role_operator->id,
-           ]);
-           
+        ]);
 
-           if (!$user_admin->roles()->where('name', 'admin')->exists()) {
-            $user_admin->roles()->attach($role_admin->id);
-            }
+        // Menambahkan role admin ke user admin
+        if (!$user_admin->roles()->where('name', 'admin')->exists()) {
+            $user_admin->roles()->attach($role_admin);
+        }
 
-            if (!$user_operator->roles()->where('name', 'operator')->exists()) {
-                $user_operator->roles()->attach($role_operator->id);
-                }
-    
+        // Menambahkan role operator ke user operator
+        if (!$user_operator->roles()->where('name', 'operator')->exists()) {
+            $user_operator->roles()->attach($role_operator);
+        }
 
-            $this->call(BeritaSeeder::class);
-            $this->call(EkskulSeeder::class);
-            $this->call(EventSeeder::class);
-            $this->call(FasilitasSeeder::class);
-            $this->call(GuruSeeder::class);
-            $this->call(PrestasiSeeder::class);
-
+        // Panggil seeder lain jika ada
+        $this->call([
+            BeritaSeeder::class,
+            EkskulSeeder::class,
+            EventSeeder::class,
+            FasilitasSeeder::class,
+            GuruSeeder::class,
+            PrestasiSeeder::class,
+        ]);
     }
 }

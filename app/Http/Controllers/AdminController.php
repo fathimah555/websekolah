@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News; // Model untuk manajemen berita
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -105,4 +106,11 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Berita dihapus.');
     }
+    
+    public function settings()
+    {
+        $users = User::all();
+        return view('admin.settings', compact('users'));
+    }
+    
 }
