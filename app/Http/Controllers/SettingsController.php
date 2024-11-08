@@ -15,22 +15,24 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        // Mendapatkan pengguna yang sedang login
         $user = auth()->user();
     
-        // Cek apakah email dan role sesuai dengan admin utama
+        // Cek apakah pengguna berhasil login dan adalah super admin
+        if (!$user) {
+            return redirect()->route('login');
+        }
+    
+        // Cek apakah pengguna dengan email "admin@gmail.com" adalah super admin
         if ($user->email === 'admin@gmail.com' && $user->is_superadmin) {
-            // Jika pengguna adalah admin utama, tampilkan semua pengguna
             $users = User::all();
         } else {
-            // Jika bukan, tampilkan hanya data diri pengguna itu sendiri
             $users = User::where('id', $user->id)->get();
         }
     
         return view('admin.settings.index', compact('users'));
     }
     
-    
+
 
     /**
      * Menampilkan halaman form untuk menambahkan pengguna baru
@@ -51,7 +53,7 @@ class SettingsController extends Controller
         }
 
         // Kirim data pengguna ke view untuk form edit
-        return view('admin.settings.edit', compact('user'));
+        return view('admin.settings.edit', compact('users'));
     }
 
     /**

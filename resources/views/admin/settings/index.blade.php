@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app') <!-- Menggunakan layout admin, pastikan file layouts/admin.blade.php ada -->
 
 @section('content')
     <div class="container">
@@ -10,8 +10,8 @@
             </div>
         @endif
 
-        @if($users->count() > 1)
-            <!-- Tombol Tambah Pengguna (Ikon Plus) hanya untuk admin -->
+        <!-- Tombol Tambah Pengguna hanya untuk superadmin -->
+        @if(auth()->user()->is_superadmin) <!-- Cek apakah user adalah superadmin -->
             <a href="{{ route('admin.settings.create') }}" class="btn btn-success">
                  <i class="bi bi-plus-circle"></i> Tambah Pengguna
             </a>
@@ -32,8 +32,8 @@
                             <i class="bi bi-pencil-square"></i> Edit
                         </a>
 
-                        <!-- Tombol Hapus (Ikon Trash) hanya untuk admin -->
-                        @if($users->count() > 1)
+                        <!-- Tombol Hapus (Ikon Trash) hanya untuk superadmin -->
+                        @if(auth()->user()->is_superadmin) <!-- Cek apakah user adalah superadmin -->
                             <form action="{{ route('admin.settings.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');">
                                 @csrf
                                 @method('DELETE')
@@ -49,5 +49,8 @@
             @endforelse
         </div>
     </div>
+
+
+    <!-- Pastikan script Bootstrap hanya ada satu di halaman ini -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

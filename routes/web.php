@@ -172,3 +172,5 @@ Route::get('/profile/sambutan-kepalasekolah', function () {
 Route::get('/visimisi/visi-misi', function () {
     return view('visimisi.visi-misi');
 });
+
+
