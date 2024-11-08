@@ -7,7 +7,7 @@
         <!-- Menampilkan pesan kesalahan jika ada -->
         @if($errors->any())
             <div class="alert alert-danger">
-                <ul>
+                <ul>cbxbahxb
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
