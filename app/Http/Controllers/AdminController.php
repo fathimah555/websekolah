@@ -46,7 +46,7 @@ class AdminController extends Controller
 
     public function create()
     {
-        return view('admin.create');
+        return view('admin.setting.create');
     }
 
     public function store(Request $request)
@@ -107,7 +107,7 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Berita dihapus.');
     }
     
-    public function settings()
+    public function index()
     {
         $users = User::all();
         return view('admin.settings', compact('users'));

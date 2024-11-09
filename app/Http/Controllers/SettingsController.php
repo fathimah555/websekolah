@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Role; // Pastikan Role diimport
+use App\Models\Role; // Pastikan Role model sudah di-import
 
 class SettingsController extends Controller
 {
@@ -15,94 +15,109 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-    
-        // Cek apakah pengguna berhasil login dan adalah super admin
-        if (!$user) {
-            return redirect()->route('login');
-        }
-    
-        // Cek apakah pengguna dengan email "admin@gmail.com" adalah super admin
-        if ($user->email === 'admin@gmail.com' && $user->is_superadmin) {
-            $users = User::all();
-        } else {
-            $users = User::where('id', $user->id)->get();
-        }
-    
-        return view('admin.settings.index', compact('users'));
-    }
-    
+    $user = auth()->user();
 
+    // Cek apakah pengguna berhasil login
+    if (!$user) {
+        return redirect()->route('login');
+    }
+
+    // Jika pengguna adalah admin utama, tampilkan semua user
+    if ($user->email === 'admin@gmail.com') {
+        $users = User::all(); // Ambil semua pengguna
+    } else {
+        // Jika bukan admin utama, hanya tampilkan data user yang login
+        $users = User::where('id', $user->id)->get();
+    }
+
+    return view('admin.settings.index', compact('users'));
+    }
 
     /**
      * Menampilkan halaman form untuk menambahkan pengguna baru
      */
     public function create()
     {
-        return view('admin.settings.create');
+    $user = auth()->user();
+    
+    // Pastikan hanya admin utama yang bisa menambah pengguna baru
+    if ($user->email !== 'admin@gmail.com') {
+        return redirect()->route('admin.settings.index')->with('error', 'Akses ditolak!');
     }
 
+    $roles = Role::all(); // Mengambil semua role untuk dipilih ketika membuat pengguna baru
+    return view('admin.settings.create', compact('roles'));
+    }
+
+    /**
+     * Menampilkan halaman form untuk mengedit pengguna yang sudah ada
+     */
     public function edit($id)
     {
-        // Temukan pengguna berdasarkan ID
-        $user = User::find($id);
+    $user = User::find($id);
 
-        // Periksa apakah pengguna ditemukan
-        if (!$user) {
-            return redirect()->route('admin.settings.index')->with('error', 'Pengguna tidak ditemukan!');
-        }
+    // Pastikan pengguna ditemukan
+    if (!$user) {
+        return redirect()->route('admin.settings.index')->with('error', 'Pengguna tidak ditemukan!');
+    }
 
-        // Kirim data pengguna ke view untuk form edit
-        return view('admin.settings.edit', compact('users'));
+    $roles = Role::all(); // Ambil semua role
+    return view('admin.settings.edit', compact('user', 'roles'));
     }
 
     /**
      * Menyimpan pengguna baru
      */
     public function store(Request $request)
-    {
-        // Validasi input
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:8',
-            'role_id' => 'required|exists:roles,id', // Pastikan role_id valid
-        ]);
+{
+    // Validasi input
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|confirmed|min:8',
+        'role_id' => 'required|exists:roles,id', // Pastikan role_id valid
+    ]);
 
-        // Membuat pengguna baru
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
-        ]);
+    // Membuat pengguna baru
+    $user = User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password']),
+    ]);
 
-        // Menambahkan relasi role untuk pengguna
-        $user->roles()->attach($validated['role_id']); // Menyimpan role untuk pengguna
+    // Menambahkan relasi role untuk pengguna
+    $user->roles()->attach($validated['role_id']); // Menyimpan role untuk pengguna
 
-        return redirect()->route('admin.settings.index')->with('success', 'Pengguna berhasil ditambahkan!');
-    }
+    return redirect()->route('admin.settings.index')->with('success', 'Pengguna berhasil ditambahkan!');
+}
 
     /**
      * Update pengaturan admin
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'role_id' => 'required|exists:roles,id', // Pastikan role_id valid
         ]);
 
-        // Ambil pengguna yang sedang login
-        $user = Auth::user();
+        // Ambil pengguna berdasarkan ID
+        $user = User::find($id);
 
-        // Periksa apakah user adalah instance dari model User
-        if ($user instanceof User) {
-            // Perbarui data user
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->save();
+        // Periksa apakah user ditemukan
+        if (!$user) {
+            return redirect()->route('admin.settings.index')->with('error', 'Pengguna tidak ditemukan');
         }
+
+        // Perbarui data pengguna
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        // Update relasi role untuk pengguna
+        $user->roles()->sync([$request->role_id]); // Mengubah role pengguna
 
         // Kembalikan ke halaman pengaturan admin dengan pesan sukses
         return redirect()->route('admin.settings.index')->with('success', 'Pengaturan berhasil diperbarui');
@@ -113,18 +128,22 @@ class SettingsController extends Controller
      */
     public function destroy($id)
     {
-        // Temukan pengguna berdasarkan ID
         $user = User::find($id);
-
+    
         // Periksa apakah pengguna ditemukan
         if ($user) {
+            // Jangan hapus admin utama
+            if ($user->email === 'admin@gmail.com') {
+                return redirect()->route('admin.settings.index')->with('error', 'Admin utama tidak dapat dihapus!');
+            }
+    
             // Hapus pengguna
             $user->delete();
-
+    
             // Redirect kembali ke halaman pengaturan dengan pesan sukses
             return redirect()->route('admin.settings.index')->with('success', 'Pengguna berhasil dihapus');
         }
-
+    
         // Jika pengguna tidak ditemukan, tampilkan pesan kesalahan
         return redirect()->route('admin.settings.index')->with('error', 'Pengguna tidak ditemukan');
     }

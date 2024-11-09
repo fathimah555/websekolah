@@ -35,9 +35,9 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            // Cek apakah user memiliki role admin atau operator
+            // Cek apakah user memiliki role 'admin' atau 'operator'
             if ($user->hasRole('admin')) {
-                // Redirect ke dashboard admin
+                // Redirect ke halaman dashboard admin
                 return redirect()->route('admin.dashboard')->with('success', 'Selamat datang, Admin!');
             } elseif ($user->hasRole('operator')) {
                 // Redirect ke dashboard operator
@@ -54,14 +54,21 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+     * Setelah login berhasil, cek apakah user memiliki role yang tepat.
+     * Jika bukan admin, logout dan redirect ke halaman home.
+     */
     protected function authenticated(Request $request, $user)
     {
-        // Cek role setelah login
-        if ($user->role != 'admin') {
-            // Logout pengguna yang tidak memiliki role admin
-            Auth::logout(); 
+        // Cek role pengguna setelah login
+        if (!$user->hasRole('admin')) {
+            // Logout pengguna yang tidak memiliki role 'admin'
+            Auth::logout();
             return redirect()->route('home')->with('error', 'Anda bukan admin!');
         }
+
+        // Jika user adalah admin, lanjutkan ke halaman dashboard admin
+        return redirect()->route('admin.dashboard')->with('success', 'Selamat datang, Admin!');
     }
 
     public function logout(Request $request)

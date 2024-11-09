@@ -7,7 +7,7 @@
         <!-- Menampilkan pesan kesalahan jika ada -->
         @if($errors->any())
             <div class="alert alert-danger">
-                <ul>cbxbahxb
+                <ul>
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -45,6 +45,12 @@
                     <option value="1" {{ old('role_id') == 1 ? 'selected' : '' }}>Admin</option>
                     <option value="2" {{ old('role_id') == 2 ? 'selected' : '' }}>Operator</option>
                 </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="is_superadmin" class="form-label">Superadmin</label>
+                <input type="checkbox" name="is_superadmin" id="is_superadmin" class="form-check-input">
+                <small>Centang jika pengguna ini adalah Superadmin</small>
             </div>
 
             <div class="mb-3">
