@@ -98,10 +98,7 @@
             </li>
         </ul>
     @else
-        <!-- Link Login jika pengguna belum login -->
-        <a class="nav-link text-white" href="/admin/asup">
-    <i class="fas fa-sign-in-alt"></i> Login
-    </a>
+      
 
     @endif
 </li>
