@@ -49,6 +49,7 @@ class SettingsController extends Controller
     return view('admin.settings.create', compact('roles'));
     }
 
+
     /**
      * Menampilkan halaman form untuk mengedit pengguna yang sudah ada
      */
@@ -69,7 +70,7 @@ class SettingsController extends Controller
      * Menyimpan pengguna baru
      */
     public function store(Request $request)
-{
+    {
     // Validasi input
     $validated = $request->validate([
         'name' => 'required|string|max:255',
@@ -89,7 +90,7 @@ class SettingsController extends Controller
     $user->roles()->attach($validated['role_id']); // Menyimpan role untuk pengguna
 
     return redirect()->route('admin.settings.index')->with('success', 'Pengguna berhasil ditambahkan!');
-}
+    }
 
     /**
      * Update pengaturan admin

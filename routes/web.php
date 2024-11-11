@@ -27,10 +27,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', [AdminController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [AdminController::class, 'login'])->name('submit');
+    Route::get('/asup', [AdminController::class, 'showLoginForm'])->name('login');
+    Route::post('/asup', [AdminController::class, 'login'])->name('submit');    
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth:admin');
-    Route::get('/create', [AdminController::class, 'create'])->name('create')->middleware('auth:admin');
+    Route::get('/create', [AdminController::class, 'create'])->name('create')->middleware('auth:admin'); 
     Route::post('/store', [AdminController::class, 'store'])->name('store')->middleware('auth:admin');
     Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('edit')->middleware('auth:admin');
     Route::put('/update/{id}', [AdminController::class, 'update'])->name('update')->middleware('auth:admin');
@@ -60,8 +60,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 // Operator routes 
 Route::prefix('operator')->name('operator.')->group(function () {
-    Route::get('/login', [OperatorController::class, 'showLoginForm'])->name('login');
-    Route::post('/login', [OperatorController::class, 'login'])->name('submit');
+    Route::get('/asup', [OperatorController::class, 'showLoginForm'])->name('login');
+    Route::post('/asup', [OperatorController::class, 'login'])->name('submit');
     Route::get('/create', [OperatorController::class, 'create'])->name('create')->middleware('auth:operator');
     Route::post('/store', [OperatorController::class, 'store'])->name('store')->middleware('auth:operator');
     Route::get('/edit/{id}', [OperatorController::class, 'edit'])->name('edit')->middleware('auth:operator');
@@ -172,6 +172,45 @@ Route::get('/profile/sambutan-kepalasekolah', function () {
 Route::get('/visimisi/visi-misi', function () {
     return view('visimisi.visi-misi');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -23,22 +23,18 @@
                 <label for="name" class="form-label">Nama</label>
                 <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
             </div>
-
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
             </div>
-
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
-
             <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
                 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
             </div>
-
             <div class="mb-3">
                 <label for="role" class="form-label">Role</label>
                 <select name="role_id" id="role" class="form-control" required>
@@ -46,13 +42,11 @@
                     <option value="2" {{ old('role_id') == 2 ? 'selected' : '' }}>Operator</option>
                 </select>
             </div>
-
             <div class="mb-3">
                 <label for="is_superadmin" class="form-label">Superadmin</label>
                 <input type="checkbox" name="is_superadmin" id="is_superadmin" class="form-check-input">
                 <small>Centang jika pengguna ini adalah Superadmin</small>
             </div>
-
             <div class="mb-3">
                 <button type="submit" class="btn btn-success">Tambah Pengguna</button>
                 <a href="{{ route('admin.settings.index') }}" class="btn btn-secondary">Kembali</a>

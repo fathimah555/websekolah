@@ -70,14 +70,13 @@
                         <i class="fas fa-calendar-alt"></i> Events
                     </a>
                 </li>
-                <!-- Tombol User Admin atau Logout -->
-                <li class="nav-item dropdown mx-2">
-    @if(Auth::check())
+            <!-- Tombol User Admin atau Logout -->
+            <li class="nav-item dropdown mx-2">
+            @if(Auth::check())
         <!-- Dropdown Admin hanya muncul jika user sudah login -->
         <a class="nav-link dropdown-toggle text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-user-cog"></i> {{ Auth::user()->name }} <!-- Menampilkan nama pengguna -->
         </a>
-        
         <!-- Menu Dropdown untuk Admin -->
         <ul class="dropdown-menu" aria-labelledby="adminDropdown">
             @if(Auth::user()->hasRole('admin')) <!-- Memeriksa apakah user memiliki role 'admin' -->
@@ -88,7 +87,6 @@
                     </a>
                 </li>
             @endif
-
             <!-- Menu Logout -->
             <li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
@@ -113,9 +111,8 @@
         <main class="py-4">
             @yield('content')
         </main>
-
         <footer class="text-white text-center py-4 mt-4" style="background-color: #E8B86D;">
-    <div class="container">
+     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-3">
                 <h5></h5>
@@ -134,11 +131,9 @@
         <p class="mb-0">&copy; {{ date('Y') }} Jl. Raya Pekayon Pondok Gede No. 53 Kel. Pekayon Jaya, Kec. Bekasi Selatan, Kota Bekasi. 17148. All rights reserved.</p>
     </div>
 </footer>
-
 <button id="backToTopBtn" title="Go to top" style="display: none; position: fixed; bottom: 20px; right: 20px; z-index: 99; border: none; outline: none; background-color: black; color: #E8B86D; cursor: pointer; padding: 10px; border-radius: 10px;">
     <i class="fas fa-arrow-up"></i>
 </button>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>

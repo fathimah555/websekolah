@@ -2,7 +2,6 @@
 
 @section('title', 'Beranda')
 
-
 @section('content')
  <!-- Hero Section -->
 <section id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -183,10 +182,7 @@
         </div>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
 <script>
     function scrollToSection() {
         document.getElementById('jumlahSiswaSection').scrollIntoView({ behavior: 'smooth' });
@@ -271,8 +267,6 @@
 <div class="container mt-5">
     <hr class="my-4" style="border-top: 2px dashed #007bff;">
 </div>
-
-
 
 <main class="py-4">
     @yield('content')
@@ -466,43 +460,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-            <!-- Tabel Berita
-            <div class="container mt-5">
-                <h2 class="display-4 text-center mb-4">Daftar Berita</h2>
-               
-                @if (session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
-
-                <table class="table table-striped">
-                    <thead> 
-                        <tr>
-                            <th>Judul</th>
-                            <th>Konten</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody> -->
-                    <!-- @if (Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'operator')
-    @foreach ($berita as $item)
-        <tr>
-            <td>{{ $item->title }}</td>
-            <td>{{ Str::limit($item->content, 50) }}</td>
-            <td>
-                <a href="{{ route('operator.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                <form action="{{ route('operator.destroy', $item->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Hapus</button>
-                </form>
-            </td>
-        </tr>
-    @endforeach
-@endif -->
 
  <!-- Script jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
