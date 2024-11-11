@@ -98,8 +98,6 @@
             </li>
         </ul>
     @else
-      
-
     @endif
 </li>
             </ul>
