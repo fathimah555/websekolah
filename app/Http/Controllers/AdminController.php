@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\News; // Model untuk manajemen berita
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -30,12 +32,19 @@ class AdminController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
+    
+        if (RateLimiter::tooManyAttempts('login:' . $request->ip(), 3)) {
+            return back()->with('error', 'silahkan tunggu 1 menit');
         }
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+    
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('admin.settings.index'); // Ganti ke route dashboard admin
+        }
+    
+        RateLimiter::hit('login:' . $request->ip(), 60); // Memperbarui hit rate limiter
+        
+        return back()->with('error', 'Email atau password salah');
+    
     }
     
     public function dashboard()

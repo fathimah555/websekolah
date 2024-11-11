@@ -137,8 +137,6 @@ Route::prefix('jurusan')->name('jurusan.')->group(function () {
     Route::delete('/destroy/{id}', [JurusanController::class, 'destroy'])->name('destroy');
 });
 
-
-
 // Visi Misi Routes
 Route::prefix('visimisi')->name('visimisi.')->group(function () {
     Route::get('/', [VisiMisiController::class, 'index'])->name('index');

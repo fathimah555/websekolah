@@ -8,6 +8,7 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -68,7 +69,7 @@ class LoginController extends Controller
         }
 
         // Jika user adalah admin, lanjutkan ke halaman dashboard admin
-        return redirect()->route('admin.dashboard')->with('success', 'Selamat datang, Admin!');
+        return redirect()->route('admin.index')->with('success', 'Selamat datang, Admin!');
     }
 
     public function logout(Request $request)
@@ -79,4 +80,36 @@ class LoginController extends Controller
 
         return redirect('/');
     }
+
+    public function Notification(Request $request)
+    {
+        $maxAttempts = 3; // Maksimum percobaan login
+    $lockoutTime = 60; // Waktu tunggu dalam detik (1 menit)
+
+    // Cek apakah waktu tunggu sudah habis
+    if (Session::has('login_attempt_time') && time() < Session::get('login_attempt_time')) {
+        return back()->with('lockout', true);
+    }
+
+    // Percobaan login
+    $credentials = $request->only('email', 'password');
+    if (Auth::attempt($credentials)) {
+        // Reset session ketika login berhasil
+        Session::forget(['login_attempts', 'login_attempt_time']);
+        return redirect()->intended('dashboard'); // Atur sesuai route tujuan setelah login
+    } else {
+        // Jika login gagal, tambahkan percobaan login
+        $attempts = Session::get('login_attempts', 0) + 1;
+        Session::put('login_attempts', $attempts);
+
+        if ($attempts >= $maxAttempts) {
+            Session::put('login_attempt_time', time() + $lockoutTime); // Set waktu tunggu 1 menit
+            Session::forget('login_attempts');
+            return back()->with('lockout', true);
+        }
+
+        return back()->withErrors(['email' => 'Email atau password salah.']);
+    }
+    }
 }
+ 
