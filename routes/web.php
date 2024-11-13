@@ -28,6 +28,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/marsupilami', [AdminController::class, 'showLoginForm'])->name('login');
+    Route::get('/admin/settings', [AdminController::class, 'index'])->name('admin.settings');
     Route::post('/marsupilami', [AdminController::class, 'login'])->name('submit');    
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth:admin');
     Route::get('/create', [AdminController::class, 'create'])->name('create')->middleware('auth:admin'); 

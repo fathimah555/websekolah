@@ -15,22 +15,25 @@ class SettingsController extends Controller
      */
     public function index()
     {
-    $user = auth()->user();
-
-    // Cek apakah pengguna berhasil login
-    if (!$user) {
-        return redirect()->route('login');
+        $user = auth()->user();
+    
+        // Cek apakah pengguna berhasil login
+        if (!$user) {
+            return redirect()->route('login');
+        }
+    
+        // Jika pengguna adalah admin utama, tampilkan semua user
+        if ($user->email === 'admin@gmail.com') {
+            $users = User::all(); // Ambil semua pengguna
+        } else {
+            // Jika bukan admin utama, hanya tampilkan data user yang login
+            $users = User::where('id', $user->id)->get();
+        }
+    
+        // Pastikan data 'users' dikirimkan ke view
+        return view('admin.settings.index', compact('users')); // Kirimkan data pengguna ke view
     }
-
-    // Jika pengguna adalah admin utama, tampilkan semua user
-    if ($user->email === 'admin@gmail.com') {
-        $users = User::all(); // Ambil semua pengguna
-    } else {
-        // Jika bukan admin utama, hanya tampilkan data user yang login
-        $users = User::where('id', $user->id)->get();
-    }
-
-    }
+    
 
     /**
      * Menampilkan halaman form untuk menambahkan pengguna baru
