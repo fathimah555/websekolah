@@ -20,27 +20,39 @@ class JurusanController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validasi data input
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-    
-        // Cek data yang masuk
-        // dd($request->all()); // Menampilkan data yang dikirim
-    
-        // Simpan data ke database
-        $jurusan = Jurusan::create([
-            'nama' => $request->input('nama'),
-            'deskripsi' => $request->input('deskripsi'),
-            'gambar' => $request->hasFile('gambar') ? $request->gambar->store('jurusan_images', 'public') : null,
-        ]);
-    
-        return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil ditambahkan.');
+{
+    // Validasi data yang masuk
+    $validatedData = $request->validate([
+        'nama' => 'required|string|max:255',
+        'deskripsi' => 'required|string',
+        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    // Menyimpan data jurusan
+    $jurusan = new Jurusan();
+    $jurusan->nama = $validatedData['nama'];
+    $jurusan->deskripsi = $validatedData['deskripsi'];
+
+    // Mengupload gambar jika ada
+    if ($request->hasFile('gambar')) {
+        // Ambil nama file asli dan ubah jika perlu
+        $image = $request->file('gambar');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+        // Simpan gambar ke folder public/assets/images
+        $image->move(public_path('assets/images'), $imageName);
+
+        // Simpan nama gambar ke database
+        $jurusan->gambar = $imageName;
     }
-    
+
+    // Simpan jurusan
+    $jurusan->save();
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil ditambahkan');
+}
+
     
 
     public function edit($id)
