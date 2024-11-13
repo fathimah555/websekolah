@@ -53,7 +53,7 @@
                         <li><a class="dropdown-item text-body" href="/jurusan/sambutan-kepalasekolah"><i class="fas fa-chalkboard-teacher"></i> Sambutan Kepala Sekolah</a></li>
                         <li><a class="dropdown-item text-body" href="/jurusan/visi-misi"><i class="fas fa-bullseye"></i> Visi Misi</a></li>
                         <li><a class="dropdown-item text-body" href="{{ route('guru.index') }}"><i class="fas fa-users"></i> Guru dan Tenaga Pendidik</a></li>
-                    </ul>
+                    </ul> 
                 </li>
                 <!-- Kesiswaan Dropdown -->
                 <li class="nav-item dropdown mx-2">

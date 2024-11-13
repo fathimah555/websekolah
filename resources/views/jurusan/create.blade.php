@@ -5,23 +5,22 @@
 <div class="container mt-5">
     <h1>Tambah jurusan</h1>
 
-    <form action="{{ route('jurusan.store') }}" method="POST">
-        @csrf
-    
-        <div class="mb-3">
-            <label for="name" class="form-label">nama</label>
-            <input type="text" class="form-control" id="name" name="nama" required>
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">deskripsi</label>
-            <textarea type="text" class="form-control" id="name" name="deskripsi" ></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Gambar</label>
-            <input type="file" class="form-control" id="name" name="gambar">
-        </div>
+    <form action="{{ route('jurusan.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="form-group">
+        <label for="nama">Nama Jurusan</label>
+        <input type="text" name="nama" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="deskripsi">Deskripsi</label>
+        <textarea name="deskripsi" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="gambar">Gambar</label>
+        <input type="file" name="gambar" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Simpan</button>
+</form>
 
-        <button type="submit" class="btn btn-primary">Simpan</button>
-    </form>
 </div>
 @endsection

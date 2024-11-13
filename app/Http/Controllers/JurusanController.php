@@ -21,19 +21,27 @@ class JurusanController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data yang masuk
-        $validatedData = $request->validate([
+        // Validasi data input
+        $request->validate([
             'nama' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        // Simpan data jurusan
-        Jurusan::create($validatedData);
-
-        // Redirect dengan pesan sukses
-        return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil ditambahkan');
+    
+        // Cek data yang masuk
+        // dd($request->all()); // Menampilkan data yang dikirim
+    
+        // Simpan data ke database
+        $jurusan = Jurusan::create([
+            'nama' => $request->input('nama'),
+            'deskripsi' => $request->input('deskripsi'),
+            'gambar' => $request->hasFile('gambar') ? $request->gambar->store('jurusan_images', 'public') : null,
+        ]);
+    
+        return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil ditambahkan.');
     }
+    
+    
 
     public function edit($id)
     {

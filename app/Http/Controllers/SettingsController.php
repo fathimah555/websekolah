@@ -30,7 +30,6 @@ class SettingsController extends Controller
         $users = User::where('id', $user->id)->get();
     }
 
-    return view('admin.settings.index', compact('users'));
     }
 
     /**
@@ -93,7 +92,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * Update pengaturan admin
+     * Update pengaturan admin8
      */
     public function update(Request $request, $id)
     {
