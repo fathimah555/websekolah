@@ -272,6 +272,30 @@
     @yield('content')
 
 
+    <div class="container my-5">
+    <div class="row text-center">
+        <!-- Jurusan 1 -->
+        <div class="col-md-4 mb-4" data-aos="fade-up">
+            <img src="assets/images/logo TKJ.png" alt="Logo Jurusan 1" class="img-fluid" style="max-width: 100px;">
+            <h5 class="mt-3">Teknik Komputer dan Jaringan </h5>
+        </div>
+
+        <!-- Jurusan 2 -->
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <img src="assets/images/logo TSM.jpg" alt="Logo Jurusan 2" class="img-fluid" style="max-width: 100px;">
+            <h5 class="mt-3">Teknik Sepeda Motor </h5>
+        </div>
+
+        <!-- Jurusan 3 -->
+        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <img src="assets/images/logo akuntansi.png" alt="Logo Jurusan 3" class="img-fluid" style="max-width: 100px;">
+            <h5 class="mt-3">Akuntansi</h5>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="container mt-4">
     <div class="row">
         <!-- Gambar sebelah kiri -->

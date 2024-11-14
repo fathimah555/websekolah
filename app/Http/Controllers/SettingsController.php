@@ -13,7 +13,7 @@ class SettingsController extends Controller
     /**
      * Menampilkan halaman pengaturan admin jika pengguna memiliki role 'admin'
      */
-    public function index()
+    public function index() 
     {
         $user = auth()->user();
     
