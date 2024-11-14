@@ -133,6 +133,7 @@ Route::prefix('jurusan')->name('jurusan.')->group(function () {
     Route::get('/tkj', [JurusanController::class, 'tkj'])->name('teknik komputer dan jaringan'); // Halaman TKJ
     Route::get('/akuntansi', [JurusanController::class, 'akuntansi'])->name('akuntansi'); // Halaman Akuntansi
     Route::get('/edit/{id}', [JurusanController::class, 'edit'])->name('edit');
+    Route::get('/show/{id}', [JurusanController::class, 'show'])->name('show');
     Route::put('/update/{id}', [JurusanController::class, 'update'])->name('update');
     Route::delete('/destroy/{id}', [JurusanController::class, 'destroy'])->name('destroy');
 });

@@ -20,7 +20,7 @@
                         <div class="mt-auto"></div> <!-- Spacer untuk menjaga konten tetap teratur -->
 
                         <!-- Tombol Lihat Selengkapnya -->
-                        <a href="{{ route('jurusan.' . strtolower($j->nama)) }}" class="btn btn-warning mt-2">Lihat Selengkapnya</a>
+                        <a href="{{ route('jurusan.show', ['id' => $j->id]) }}" class="btn btn-warning mt-2">Lihat Selengkapnya</a>
 
                         @if(Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'admin')
                             <div class="mt-2"> <!-- Tambahkan margin atas untuk jarak -->
@@ -39,8 +39,6 @@
         </div>
     </div>
 </section>
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>

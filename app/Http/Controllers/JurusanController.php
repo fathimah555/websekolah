@@ -62,6 +62,7 @@ class JurusanController extends Controller
         return view('jurusan.edit', ['jurusan' => $jurusan, 'isEdit' => true]);
     }
 
+
     public function update(Request $request, $id)
     {
         // Validasi data yang masuk
