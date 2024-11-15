@@ -13,7 +13,15 @@
             @foreach($ekskul as $item)
                 <div class="col mb-4 d-flex align-items-stretch"> <!-- d-flex untuk memastikan tinggi kolom sama -->
                     <div class="card h-100 shadow border-0 rounded"> <!-- h-100 memastikan kartu memenuhi tinggi kolom -->
-                        <img src="{{ asset('assets/images/' . $item->gambar) }}" class="card-img-top" alt="{{ $item->nama }}" style="height: 200px; object-fit: cover;">
+
+                        <!-- Cek apakah gambar ada sebelum menampilkan -->
+                        @if($item->gambar && file_exists(public_path('assets/images/' . $item->gambar)))
+                            <img src="{{ asset('assets/images/' . $item->gambar) }}" class="card-img-top" alt="{{ $item->nama }}" style="height: 200px; object-fit: cover;">
+                        @else
+                            <!-- Gambar default jika tidak ada gambar tersedia -->
+                            <img src="{{ asset('assets/images/default.jpg') }}" class="card-img-top" alt="Default Image" style="height: 200px; object-fit: cover;">
+                        @endif
+                        
                         <div class="card-body text-center d-flex flex-column"> <!-- flex-column untuk menyusun konten vertikal -->
                             <h5 class="card-title font-weight-bold">{{ $item->nama }}</h5>
                             <p class="card-text text-muted">{{ $item->deskripsi }}</p>

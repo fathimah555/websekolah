@@ -20,25 +20,28 @@ class EkskulController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validasi data yang diterima
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
-        ]);
+{
+    // Validasi data yang diterima
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'deskripsi' => 'required|string',
+        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+    ]);
 
-        // Menyimpan gambar jika ada
-        if ($request->hasFile('gambar')) {
-            $image = $request->gambar->getClientOriginalName();
-            $request->gambar->move(public_path('assets/images'), $image);
-            $request->merge(['gambar' => $image]); // Gabungkan dengan data yang akan disimpan
-        }
-
-        Ekskul::create($request->all());
-
-        return redirect()->route('Ekskul.index')->with('success', 'Ekskul berhasil ditambahkan');
+    // Menyimpan gambar jika ada
+    if ($request->hasFile('gambar')) {
+        $image = $request->file('gambar'); // Ambil file gambar
+        $imageName = time() . '_' . $image->getClientOriginalName(); // Buat nama unik untuk gambar
+        $image->move(public_path('assets/images'), $imageName); // Pindahkan ke folder 'public/assets/images'
+        $request->merge(['gambar' => $imageName]); // Gabungkan nama file gambar dengan data request
     }
+
+    // Simpan data ekskul
+    Ekskul::create($request->all());
+
+    // Redirect ke route yang benar dengan pesan sukses
+    return redirect()->route('ekskul.index')->with('success', 'Ekskul berhasil ditambahkan');
+}
 
     public function edit($id)
     {
@@ -79,7 +82,7 @@ class EkskulController extends Controller
         $Ekskul = Ekskul::findOrFail($id);
         $Ekskul->delete();
 
-        return redirect()->route('Ekskul.index')->with('success', 'Ekskul berhasil dihapus');
+        return redirect()->route('ekskul.index')->with('success', 'Ekskul berhasil dihapus');
     }
 
     // Menambahkan metode tsm untuk detail Ekskul

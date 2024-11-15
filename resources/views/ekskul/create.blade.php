@@ -3,10 +3,10 @@
 
 @section('content')
 <div class="container mt-5">
-    <h1>Tambah guru</h1>
+    <h1>Tambah Ekskul</h1>
 
-    <form action="{{ route('guru.store') }}" method="POST">
-        @csrf
+    <form action="{{ route('ekskul.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
     
         <div class="mb-3">
             <label for="name" class="form-label">Nama</label>

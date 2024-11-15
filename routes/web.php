@@ -110,7 +110,7 @@ Route::prefix('ekskul')->name('ekskul.')->group(function () {
     Route::get('/{id}', [EkskulController::class, 'show'])->name('show');
     Route::get('/edit/{id}', [EkskulController::class, 'edit'])->name('edit');
     Route::post('/ekskul/update/{id}', [EkskulController::class, 'update'])->name('update');
-    Route::post('/destroy/{id}', [EkskulController::class, 'destroy'])->name('destroy');
+    Route::delete('/destroy/{id}', [EkskulController::class, 'destroy'])->name('destroy');
 });
 
 // Fasilitas routes
