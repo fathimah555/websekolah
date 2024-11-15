@@ -16,7 +16,7 @@ class EkskulController extends Controller
 
     public function create()
     {
-        return view('Ekskul.create', ['isEdit' => false]);
+        return view('ekskul.create', ['isEdit' => false]);
     }
 
     public function store(Request $request)
