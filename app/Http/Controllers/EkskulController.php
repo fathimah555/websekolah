@@ -20,28 +20,25 @@ class EkskulController extends Controller
     }
 
     public function store(Request $request)
-{
-    // Validasi data yang diterima
-    $request->validate([
-        'nama' => 'required|string|max:255',
-        'deskripsi' => 'required|string',
-        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
-    ]);
-
-    // Menyimpan gambar jika ada
-    if ($request->hasFile('gambar')) {
-        $image = $request->file('gambar'); // Ambil file gambar
-        $imageName = time() . '_' . $image->getClientOriginalName(); // Buat nama unik untuk gambar
-        $image->move(public_path('assets/images'), $imageName); // Pindahkan ke folder 'public/assets/images'
-        $request->merge(['gambar' => $imageName]); // Gabungkan nama file gambar dengan data request
+    {
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validasi file gambar
+        ]);
+    
+        if ($request->hasFile('gambar')) {
+            $image = $request->file('gambar');
+            $imageName = time() . '_' . $image->getClientOriginalName(); // Nama file unik
+            $image->move(public_path('assets/images'), $imageName); // Simpan ke folder `assets/images`
+            $validatedData['gambar'] = $imageName;
+        }
+    
+        Ekskul::create($validatedData);
+    
+        return redirect()->route('ekskul.index')->with('success', 'Data ekstrakurikuler berhasil ditambahkan!');
     }
-
-    // Simpan data ekskul
-    Ekskul::create($request->all());
-
-    // Redirect ke route yang benar dengan pesan sukses
-    return redirect()->route('ekskul.index')->with('success', 'Ekskul berhasil ditambahkan');
-}
+    
 
     public function edit($id)
     {

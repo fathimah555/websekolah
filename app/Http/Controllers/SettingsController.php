@@ -148,6 +148,6 @@ class SettingsController extends Controller
         }
     
         // Jika pengguna tidak ditemukan, tampilkan pesan kesalahan
-        return redirect()->route('admin.settings.index')->with('error', 'Pengguna tidak ditemukan');
+        return redirect()->route('admin.settings.index')->with('error ', 'Pengguan tidak Ditemukan');
     }
 }

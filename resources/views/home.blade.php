@@ -12,7 +12,7 @@
                 <div class="carousel-caption text-white text-center">
                     <h1 class="display-4">Selamat Datang di SMK GEMA KARYA BAHANA</h1>
                     <p class="lead">Ber Akhlak Mulia, Ber Taqwa & Ber Mutu (ATM)</p>
-                    <a href="{{ route('home') }}" class="btn  text-dark"></a>
+                    <a href="{{ route('home') }}" class="btn text-dark"></a>
                 </div>
             </div>
         </div>

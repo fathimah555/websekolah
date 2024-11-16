@@ -1,40 +1,47 @@
 @extends('layouts.app')
 
-@section('title', 'Visi dan Misi')
+@section('title', 'Prestasi')
 
 @section('content')
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center mb-4">Visi dan Misi</h2>
+        <h2 class="text-center mb-4">Prestasi</h2>
 
         @if(Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'admin')
-            <a href="{{ route('visimisi.create') }}" class="btn btn-primary mt-4 mb-4">Tambah Visi dan Misi</a>
+            <a href="{{ route('prestasi.create') }}" class="btn btn-primary mt-4 mb-4">Tambah Prestasi</a>
         @endif
 
-        <div class="row">
-            @foreach($visimisi as $item)
-                <div class="col mb-4">
-                    <div class="card shadow border-0 rounded">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Visi</h5>
-                            <p class="card-text">{{ $item->visi }}</p> <!-- Menampilkan visi -->
+        <div class="row row-cols-1 row-cols-md-3 g-4"> <!-- Responsif dengan gutter -->
+            @foreach($prestasi as $item)
+                <div class="col mb-4 d-flex align-items-stretch"> <!-- d-flex untuk memastikan tinggi kolom sama -->
+                    <div class="card h-100 shadow border-0 rounded"> <!-- h-100 memastikan kartu memenuhi tinggi kolom -->
 
-                            <h5 class="card-title">Misi</h5>
-                            <p class="card-text">
-                                @if($item->misi)
-                                    {!! nl2br(e($item->misi)) !!} <!-- Menampilkan misi dengan format terpisah -->
-                                @else
-                                    <span>Tidak ada misi yang ditentukan.</span>
-                                @endif
-                            </p>
+                        <!-- Cek apakah gambar ada sebelum menampilkan -->
+                        @if($item->gambar && file_exists(public_path('assets/images/' . $item->gambar)))
+                            <img src="{{ asset('assets/images/' . $item->gambar) }}" class="card-img-top" alt="{{ $item->judul }}" style="height: 200px; object-fit: cover;">
+                        @else
+                            <!-- Gambar default jika tidak ada gambar tersedia -->
+                            <img src="{{ asset('assets/images/default.jpg') }}" class="card-img-top" alt="Default Image" style="height: 200px; object-fit: cover;">
+                        @endif
+
+                        <div class="card-body text-center d-flex flex-column"> <!-- flex-column untuk menyusun konten vertikal -->
+                            <h5 class="card-title font-weight-bold">{{ $item->judul }}</h5>
+                            <p class="card-text text-muted">{{ $item->deskripsi }}</p>
+                            <div class="mt-auto"></div> <!-- Spacer untuk menjaga konten tetap teratur -->
 
                             @if(Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'admin')
-                                <a href="{{ route('visimisi.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('visimisi.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Hapus</button>
-                                </form>
+                                <div class="row mt-2"> <!-- Tambahkan margin atas untuk spasi -->
+                                    <div class="col-6">
+                                        <a href="{{ route('prestasi.edit', $item->id) }}" class="btn btn-warning w-100">Edit</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <form action="{{ route('prestasi.destroy', $item->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE') <!-- Pastikan untuk menyertakan metode DELETE -->
+                                            <button type="submit" class="btn btn-danger w-100">Hapus</button>
+                                        </form>
+                                    </div>
+                                </div>
                             @endif
                         </div>
                     </div>

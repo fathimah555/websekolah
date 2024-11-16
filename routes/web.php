@@ -121,7 +121,7 @@ Route::prefix('fasilitas')->name('fasilitas.')->group(function () {
     Route::get('/{id}', [FasilitasController::class, 'show'])->name('show');
     Route::get('/edit/{id}', [FasilitasController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [FasilitasController::class, 'update'])->name('update');
-    Route::post('/destroy/{id}', [FasilitasController::class, 'destroy'])->name('destroy');
+    Route::delete('/destroy/{id}', [FasilitasController::class, 'destroy'])->name('destroy');
 });
 
 // Jurusan routes

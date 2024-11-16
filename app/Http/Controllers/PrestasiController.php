@@ -22,7 +22,23 @@ class PrestasiController extends Controller
 
     public function store(Request $request)
     {
-        Prestasi::create($request->all());
+        // Validasi data
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'date' => 'required|date',
+            'description' => 'nullable|string|max:255',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar
+        ]);
+
+        // Cek apakah ada file gambar yang diunggah
+        if ($request->hasFile('gambar')) {
+            $imageName = time() . '_' . $request->gambar->getClientOriginalName();
+            $request->gambar->move(public_path('assets/images'), $imageName);
+            $validated['gambar'] = $imageName; // Tambahkan nama file gambar ke data validasi
+        }
+
+        // Simpan data ke database
+        Prestasi::create($validated);
 
         return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil ditambahkan');
     }
