@@ -11,8 +11,8 @@
 
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $visimisi->title) }}" required>
-        </div>
+            <input type="text" name="title" value="{{ $prestasi->title }}" class="form-control">
+            </div>
 
         <div class="mb-3">
             <label for="visi" class="form-label">Visi</label>

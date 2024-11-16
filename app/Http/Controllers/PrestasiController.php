@@ -43,12 +43,11 @@ class PrestasiController extends Controller
         return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil ditambahkan');
     }
 
-    public function edit($id)
+        public function edit($id)
     {
         $prestasi = Prestasi::findOrFail($id);
         return view('prestasi.edit', ['prestasi' => $prestasi]);
     }
-
     public function update(Request $request, $id)
     {
         $prestasi = Prestasi::findOrFail($id);
