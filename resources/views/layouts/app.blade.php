@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+   
+
 
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -73,30 +75,7 @@
             <!-- Tombol User Admin atau Logout -->
             <li class="nav-item dropdown mx-2">
             @if(Auth::check())
-        <!-- Dropdown Admin hanya muncul jika user sudah login -->
-        <a class="nav-link dropdown-toggle text-white" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-user-cog"></i> {{ Auth::user()->name }} <!-- Menampilkan nama pengguna -->
-        </a>
-        <!-- Menu Dropdown untuk Admin -->
-        <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-            @if(Auth::user()->hasRole('admin')) <!-- Memeriksa apakah user memiliki role 'admin' -->
-                <!-- Link Pengaturan Admin -->
-                <li>
-                    <a class="dropdown-item text-body" href="{{ route('admin.settings.index') }}">
-                        <i class="fas fa-cogs"></i> Pengaturan
-                    </a>
-                </li>
-            @endif
-            <!-- Menu Logout -->
-            <li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
-                    @csrf
-                    <button type="submit" class="dropdown-item text-body" style="border: none; background: none; cursor: pointer;">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
-                </form>
-            </li>
-        </ul>
+       
     @else
     @endif
 </li>

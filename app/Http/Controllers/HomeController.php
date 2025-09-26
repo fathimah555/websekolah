@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\News;
 use App\Models\Guru; // Import model Guru
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,13 +28,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Mengambil semua data berita
-        $berita = Berita::latest()->take(6)->get(); // Ambil 6 berita terbaru
-
-        // Mengambil data guru (misalnya hanya 3 guru)
-        $gurus = Guru::take(3)->get(); // Ambil 3 guru untuk ditampilkan
-
-        // Mengembalikan tampilan home dengan data berita dan guru
-        return view('home', compact('berita', 'gurus'));
+        // Mengambil 6 berita terbaru
+        $berita = Berita::latest()->take(6)->get();
+    
+        // Mengambil 3 guru untuk ditampilkan
+        $gurus = Guru::take(3)->get();
+    
+        // Mengambil 3 event terbaru
+        $events = Event::latest()->take(3)->get();
+    
+        // Mengirim semua data ke view
+        return view('home', compact('berita', 'gurus', 'events'));
     }
+        
+
 }

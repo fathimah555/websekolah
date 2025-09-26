@@ -121,5 +121,17 @@ class AdminController extends Controller
         $users = User::all();
         return view('admin.settings', compact('users'));
     }
+
+    public function logout(Request $request)
+    {
+            Auth::guard('admin')->logout(); // Menggunakan guard 'admin' untuk logout
+            $request->session()->invalidate(); // Menghentikan sesi pengguna
+            $request->session()->regenerateToken(); // Regenerasi token CSRF
+
+            return redirect()->route('admin.login'); // Arahkan kembali ke halaman login
+    }
     
 }
+
+
+

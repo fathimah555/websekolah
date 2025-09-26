@@ -26,10 +26,24 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        Event::create($request->all());
-
-        return redirect()->route('events.index')->with('success', 'Event berhasil ditambahkan');
+        $request->validate([
+            'title' => 'required',
+            'date' => 'required|date',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('public/gambar', $imageName); // Simpan di folder public/gambar
+    
+        Event::create([
+            'title' => $request->title,
+            'date' => $request->date,
+            'image' => $imageName,
+        ]);
+    
+        return redirect()->route('events.index')->with('success', 'Event created successfully.');
     }
+    
 
     public function edit($id)
     {

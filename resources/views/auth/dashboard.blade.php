@@ -30,7 +30,7 @@
                 <th>Aksi</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody> 
             @foreach ($news as $item)
                 <tr>
                     <td>{{ $item->id }}</td>

@@ -5,6 +5,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FasilitasController;
+use App\Http\Controllers\GambarController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
@@ -27,15 +28,15 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/marsupilami', [AdminController::class, 'showLoginForm'])->name('login');
-    Route::post('/marsupilami', [AdminController::class, 'login'])->name('submit');    
+    Route::get('/g3m4', [AdminController::class, 'showLoginForm'])->name('login');
+    Route::post('/g3m4', [AdminController::class, 'login'])->name('submit');    
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth:admin');
     Route::get('/create', [AdminController::class, 'create'])->name('create')->middleware('auth:admin'); 
     Route::post('/store', [AdminController::class, 'store'])->name('store')->middleware('auth:admin');
     Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('edit')->middleware('auth:admin');
     Route::put('/update/{id}', [AdminController::class, 'update'])->name('update')->middleware('auth:admin');
     Route::delete('/destroy/{id}', [AdminController::class, 'destroy'])->name('destroy')->middleware('auth:admin');
-    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
 
@@ -58,10 +59,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('admin/settings/{user}', [SettingsController::class, 'destroy'])->name('settings.destroy');
 });
 
+Route::get('/login', function () {
+    abort(404); // Tampilkan halaman 404 jika mencoba mengakses /login
+});
+
 // Operator routes 
 Route::prefix('operator')->name('operator.')->group(function () {
-    Route::get('/marsupilami', [OperatorController::class, 'showLoginForm'])->name('login');
-    Route::post('/marsupilami', [OperatorController::class, 'login'])->name('submit');
+    Route::get('/g3m4', [OperatorController::class, 'showLoginForm'])->name('login');
+    Route::post('/g3m4', [OperatorController::class, 'login'])->name('submit');
     Route::get('/create', [OperatorController::class, 'create'])->name('create')->middleware('auth:operator');
     Route::post('/store', [OperatorController::class, 'store'])->name('store')->middleware('auth:operator');
     Route::get('/edit/{id}', [OperatorController::class, 'edit'])->name('edit')->middleware('auth:operator');
@@ -77,13 +82,14 @@ Route::prefix('guru')->name('guru.')->group(function () {
     Route::post('/', [GuruController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [GuruController::class, 'edit'])->name('edit');
     Route::post('/update/{id}', [GuruController::class, 'update'])->name('update');
+    // Route::get('/dashboard', [GuruController::class, 'index'])->name('dashboard');
     Route::delete('/destroy/{id}', [GuruController::class, 'destroy'])->name('destroy');
 });
 
 // Event routes
 Route::prefix('events')->name('events.')->group(function () {
     Route::get('/', [EventController::class, 'index'])->name('index');
-    Route::get('/create', [EventController::class, 'create'])->name('create');
+    Route::get('/create', [EventController::class, 'create'])->name('create'); 
     Route::post('/store', [EventController::class, 'store'])->name('store');
     Route::get('/{id}', [EventController::class, 'show'])->name('show');
     Route::get('/edit/{id}', [EventController::class, 'edit'])->name('edit');
@@ -172,30 +178,37 @@ Route::get('/visimisi/visi-misi', function () {
     return view('visimisi.visi-misi');
 });
 
+Route::get('/layouts-guru-dan-tenaga-pendidik', function () {
+    $gurus = App\Models\Guru::all(); // Pastikan model ini sesuai
+    return view('layouts.guru dan tenaga pendidik', compact('gurus'));
+})->name('layouts.guru_dan_tenaga_pendidik');
 
+Route::get('/layouts-prestasi', function () {
+    $prestasis = App\Models\Prestasi::all(); // Pastikan model ini sesuai
+    return view('layouts.prestasi', compact('prestasis'));
+})->name('layouts.prestasi');
 
+Route::get('/layouts-ekskul', function () {
+    $ekskul = App\Models\Ekskul::all(); // Pastikan model ini sesuai
+    return view('layouts.ekskul', compact('ekskul'));
+})->name('layouts.ekskul');
 
+Route::get('/layouts-event', function () {
+    $events = App\Models\Event::all(); // Pastikan model ini sesuai
+    return view('layouts.event', compact('events'));
+})->name('layouts.event');
 
+Route::get('/pengaturan', function () {
+    return view('layouts.pengaturan');
+})->name('layouts.pengaturan');
 
+Route::get('/layouts-berita', function () {
+    $berita = App\Models\Berita::all(); // Pastikan model ini sesuai
+    return view('layouts.berita', compact('berita'));
+})->name('layouts.berita');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/upload', [GambarController::class, 'index'])->name('gambar.index');
+Route::post('/upload', [GambarController::class, 'store'])->name('gambar.store');
 
 
 

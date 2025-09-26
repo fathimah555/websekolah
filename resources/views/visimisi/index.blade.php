@@ -13,8 +13,8 @@
 
         <div class="row">
             @foreach($visimisi as $item)
-                <div class="col mb-4">
-                    <div class="card shadow border-0 rounded">
+                <div class="col-4">
+                    <div class="card shadow border-0 rounded">  
                         <div class="card-body text-center">
                             <h5 class="card-title">Visi</h5>
                             <p class="card-text">{{ $item->visi }}</p> <!-- Menampilkan visi -->
@@ -25,7 +25,7 @@
                                     {!! nl2br(e($item->misi)) !!} <!-- Menampilkan misi dengan format terpisah -->
                                 @else
                                     <span>Tidak ada misi yang ditentukan.</span>
-                                @endif
+                                @endif  
                             </p>
 
                             @if(Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'admin')

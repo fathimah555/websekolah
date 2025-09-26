@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             EkskulSeeder::class,
             EventSeeder::class,
             FasilitasSeeder::class,
-            GuruSeeder::class,
+                Seeder::class,
             PrestasiSeeder::class,
         ]);
     }

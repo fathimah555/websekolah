@@ -13,27 +13,27 @@ class SettingsController extends Controller
     /**
      * Menampilkan halaman pengaturan admin jika pengguna memiliki role 'admin'
      */
-    public function index() 
+    public function index()
     {
-        $user = auth()->user();
-    
+        $user = Auth()->user();
+
         // Cek apakah pengguna berhasil login
         if (!$user) {
             return redirect()->route('login');
         }
-    
+
         // Jika pengguna adalah admin utama, tampilkan semua user
         if ($user->email === 'admin@gmail.com') {
-            $users = User::all(); // Ambil semua pengguna
+            // Mengambil semua pengguna yang terbaru
+            $users = User::all(); 
         } else {
             // Jika bukan admin utama, hanya tampilkan data user yang login
             $users = User::where('id', $user->id)->get();
         }
-    
+
         // Pastikan data 'users' dikirimkan ke view
         return view('admin.settings.index', compact('users')); // Kirimkan data pengguna ke view
     }
-    
 
     /**
      * Menampilkan halaman form untuk menambahkan pengguna baru
@@ -73,37 +73,41 @@ class SettingsController extends Controller
      */
     public function store(Request $request)
     {
-    // Validasi input
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|confirmed|min:8',
-        'role_id' => 'required|exists:roles,id', // Pastikan role_id valid
-    ]);
-
-    // Membuat pengguna baru
-    $user = User::create([
-        'name' => $validated['name'],
-        'email' => $validated['email'],
-        'password' => bcrypt($validated['password']),
-    ]);
-
-    // Menambahkan relasi role untuk pengguna
-    $user->roles()->attach($validated['role_id']); // Menyimpan role untuk pengguna
-
-    return redirect()->route('admin.settings.index')->with('success', 'Pengguna berhasil ditambahkan!');
+        // Validasi input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    
+        // Membuat pengguna baru
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+        ]);
+    
+        // Menambahkan role untuk pengguna
+        $user->roles()->attach($request->role_id);
+    
+        // Kembalikan data pengguna baru ke dalam format JSON
+        return response()->json([
+            'success' => 'Pengguna berhasil ditambahkan!',
+            'user' => $user,
+        ]);
     }
+    
 
     /**
      * Update pengaturan admin8
      */
     public function update(Request $request, $id)
     {
-        // Validasi input
+        // Validasi input, kecuali untuk pengguna yang sedang diperbarui
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'role_id' => 'required|exists:roles,id', // Pastikan role_id valid
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id, // Menghindari duplikat untuk email yang sama
+            'role_id' => 'required|exists:roles,id',
         ]);
 
         // Ambil pengguna berdasarkan ID
@@ -120,7 +124,7 @@ class SettingsController extends Controller
         $user->save();
 
         // Update relasi role untuk pengguna
-        $user->roles()->sync([$request->role_id]); // Mengubah role pengguna
+        $user->roles()->sync([$request->role_id]);
 
         // Kembalikan ke halaman pengaturan admin dengan pesan sukses
         return redirect()->route('admin.settings.index')->with('success', 'Pengaturan berhasil diperbarui');

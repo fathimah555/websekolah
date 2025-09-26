@@ -92,6 +92,10 @@ class GuruSeeder extends Seeder
         ['nama' => 'M. Tarkim R'],
         ['jabatan' => 'Staf Hubind', 'gambar' => 'assets/images/img15.jpg', 'tipe' => 'struktur']
     );
+    DB::table('gurus')->updateOrInsert(
+        ['nama' => 'M. Tarkim R'],
+        ['jabatan' => 'Staf Hubind', 'gambar' => 'assets/images/img15.jpg', 'tipe' => 'struktur']
+    );
 
     }
 }

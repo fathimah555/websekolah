@@ -1,6 +1,12 @@
-@extends('layouts.app')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
 <section id="events" class="py-5 bg-light">
     <div class="container">
         @if(Auth::check() && Auth::user()->roles->isNotEmpty() && Auth::user()->roles[0]->name == 'admin')
@@ -15,7 +21,7 @@
                     <div class="col mb-4">
                         <div class="card h-100 shadow-lg rounded"> <!-- Rounded untuk border dan shadow-lg untuk bayangan -->
                             @if($event->gambar)
-                            <img src="{{ asset('storage/gambar/' . $event->image) }}" alt="{{ $event->title }}" class="img-fluid">
+                                <img src="{{ asset('assets/images/' . $event->gambar) }}" class="card-img-top rounded-top" alt="{{ $event->title }}" style="height: 200px; object-fit: cover;">
                             @else
                                 <img src="https://via.placeholder.com/300x200" class="card-img-top rounded-top" alt="Gambar Event" style="height: 200px; object-fit: cover;">
                             @endif
@@ -45,6 +51,6 @@
         </div>
     </div>
 </section>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-@endsection
+</body>
+</html>
