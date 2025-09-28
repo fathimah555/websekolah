@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\EkskulController;
 use App\Http\Controllers\EventController;
@@ -209,6 +210,10 @@ Route::get('/layouts-berita', function () {
 
 Route::get('/upload', [GambarController::class, 'index'])->name('gambar.index');
 Route::post('/upload', [GambarController::class, 'store'])->name('gambar.store');
+
+
+Route::get('/admin/settings', [AdminSettingsController::class, 'index'])->name('admin.settings.index');
+
 
 
 

@@ -459,7 +459,7 @@
     <div class="container">
         <h2 class="mb-4">Event Terbaru</h2>
         <div class="row">
-            @foreach ($events as $event)
+            @foreach ($events->take(3) as $event) <!-- ambil 3 event terbaru -->
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="1000">
                     <div class="card h-100">
                         @if($event->gambar)
@@ -484,8 +484,16 @@
                 </div>
             @endforeach
         </div>
+
+        <!-- Tombol Lihat Selengkapnya -->
+        <div class="text-center mt-4">
+            <a href="{{ route('events.index') }}" class="btn btn-warning text-white fw-bold">
+                Lihat Selengkapnya
+            </a>
+        </div>
     </div>
 </section>
+
 <div class="container mt-5" id="lokasiSection">
     <div class="row">
         <div class="col-12">
